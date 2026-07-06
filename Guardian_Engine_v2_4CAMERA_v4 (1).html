@@ -1,0 +1,3274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+</style><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+
+/* === 4-CAMERA NAMESPACED === */
+#panel-camera { --neon-cyan:#0ff; --neon-magenta:#f0f; --neon-purple:#9d00ff; --neon-orange:#ff9d00; --neon-red:#ff003c; --bg:#0a0a0c; }
+#panel-camera * { box-sizing:border-box; margin:0; padding:0; }
+#panel-camera { background:transparent; color:#fff; font-family:'Courier New',monospace; -webkit-font-smoothing:antialiased; line-height:1.5; padding:0; width:100%; }
+#panel-camera .app { width:100%; max-width:520px; background:#121216; padding:24px; border-radius:20px; border:2px solid #333; box-shadow:inset 0 0 15px rgba(0,0,0,0.8),0 10px 30px rgba(0,0,0,0.5); margin:0 auto; }
+#panel-camera header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+#panel-camera .title-wrap{display:flex;align-items:center;gap:10px}
+#panel-camera .header-dot{width:12px;height:12px;border-radius:50%;background:var(--neon-cyan);box-shadow:0 0 10px var(--neon-cyan),0 0 20px rgba(0,255,255,.4);flex-shrink:0}
+#panel-camera h1{font-size:20px;font-weight:900;letter-spacing:.6px;color:var(--neon-cyan);text-shadow:0 0 10px var(--neon-cyan);text-align:center}
+#panel-camera .badge{background:#050505;border:1px solid var(--neon-purple);color:var(--neon-cyan);font-size:12px;font-weight:600;padding:4px 10px;border-radius:10px;box-shadow:inset 0 0 6px rgba(157,0,255,.4)}
+#panel-camera .pill{background:#050505;border:1px solid #333;color:var(--neon-cyan);font-size:12px;text-align:center;padding:8px 12px;border-radius:999px;margin:10px 0 18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:inset 0 0 8px rgba(157,0,255,.3)}
+#panel-camera .card{background:transparent;border:none;padding:0}
+#panel-camera .section{margin-bottom:20px}
+#panel-camera .label{display:block;font-size:11px;font-weight:700;letter-spacing:1px;color:var(--neon-cyan);margin-bottom:10px;text-transform:uppercase;text-shadow:0 0 5px rgba(0,255,255,.5)}
+#panel-camera select,#panel-camera textarea,#panel-camera button{font-family:inherit}
+#panel-camera .select-wrap{position:relative}
+#panel-camera select,#panel-camera textarea{width:100%;background:#050505;color:var(--neon-cyan);border:2px solid var(--neon-purple);border-radius:8px;padding:12px;box-shadow:inset 0 0 10px var(--neon-purple);outline:none;margin-bottom:15px;font-size:16px;transition:box-shadow .2s,border-color .2s}
+#panel-camera select{appearance:none;padding-right:40px;cursor:pointer}
+#panel-camera select:focus,#panel-camera textarea:focus{border-color:var(--neon-cyan);box-shadow:inset 0 0 12px var(--neon-cyan)}
+#panel-camera .select-wrap::after{content:"";position:absolute;right:14px;top:50%;width:14px;height:14px;transform:translateY(-50%);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2300ffff' stroke-width='2' stroke-linecap='round' %3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;pointer-events:none;opacity:.9;filter:drop-shadow(0 0 4px #0ff)}
+#panel-camera optgroup{background:#0a0a0c;color:var(--neon-magenta);font-style:normal;font-weight:700}
+#panel-camera option{background:#050505;color:#e2e8f0;padding:6px}
+#panel-camera .guardians{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;padding:0 4px}
+#panel-camera .g-item{display:flex;align-items:center;justify-content:center;gap:7px;font-size:12px;font-weight:700;letter-spacing:.5px;color:#6b7d94}
+#panel-camera .g-dot{width:9px;height:9px;border-radius:50%;background:#334155;opacity:.35;transition:all .25s ease;flex-shrink:0}
+#panel-camera .g-dot.active.lunara{background:#c0c0c0;opacity:1;box-shadow:0 0 8px rgba(192,192,192,.7)}
+#panel-camera .g-dot.active.aethon{background:var(--neon-purple);opacity:1;box-shadow:0 0 8px var(--neon-purple)}
+#panel-camera .g-dot.active.solaris{background:var(--neon-orange);opacity:1;box-shadow:0 0 10px var(--neon-orange)}
+#panel-camera .check-row{display:flex;align-items:center;gap:10px;margin:14px 0 6px}
+#panel-camera input[type="checkbox"]{width:18px;height:18px;accent-color:var(--neon-magenta);cursor:pointer;flex-shrink:0}
+#panel-camera .check-row label{font-size:14px;color:#b8c6d6;cursor:pointer;user-select:none}
+#panel-camera textarea::placeholder{color:#5a6e85}
+#panel-camera #subject{min-height:115px;font-family:'Courier New',monospace;border:2px solid var(--neon-cyan);box-shadow:inset 0 0 10px var(--neon-cyan),0 0 5px rgba(0,255,255,.3)}
+#panel-camera #subject:focus{box-shadow:inset 0 0 12px var(--neon-cyan),0 0 8px rgba(0,255,255,.5)}
+#panel-camera #output{min-height:150px;font-family:'Courier New',monospace;background:#050505}
+#panel-camera button{width:100%;padding:15px;border:none;border-radius:8px;font-weight:900;text-transform:uppercase;cursor:pointer;margin-bottom:10px;transition:.3s;box-shadow:0 0 10px var(--neon-magenta),inset 0 0 5px #fff}
+#panel-camera .btn-generate,#panel-camera #generate{background:var(--neon-magenta);color:#000;border:2px solid var(--neon-cyan);margin:8px 0 22px;box-shadow:0 0 10px var(--neon-magenta),inset 0 0 5px #fff}
+#panel-camera .btn-generate:hover,#panel-camera #generate:hover{filter:brightness(1.5);box-shadow:0 0 20px var(--neon-cyan);transform:translateY(-1px)}
+#panel-camera .btn-generate:active,#panel-camera #generate:active{transform:translateY(1px)}
+#panel-camera .btn-copy,#panel-camera #copy{background:var(--neon-orange);color:#000;border:2px solid var(--neon-red);box-shadow:0 0 10px var(--neon-orange),inset 0 0 5px #fff;margin-top:10px;padding:12px;font-size:14px}
+#panel-camera .btn-copy:hover,#panel-camera #copy:hover{filter:brightness(1.5);box-shadow:0 0 20px var(--neon-orange)}
+#panel-camera .divider{height:1px;background:#333;margin:16px 0;opacity:.8;box-shadow:0 0 6px var(--neon-purple)}
+@media (max-width:390px){#panel-camera h1{font-size:18px}#panel-camera .pill{font-size:11px;padding:7px 10px}#panel-camera .app{padding:20px 16px;border-radius:18px}#panel-camera .g-item{font-size:11px;gap:5px}}
+
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="description" content="Guardian Engine v2.0 - Benneig Tattoo Prompt Generator. AI-powered prompt forge for tattoo artists.">
+<meta name="theme-color" content="#0a0c10">
+<title>Guardian Engine v2.0 — Benneig Edition</title>
+<style>
+/* ============================================
+   GUARDIAN ENGINE v2.0 — UNIFIED STYLESHEET
+   Base: Meta.html | Fixes: 26gift-4u.html | Enhancements: SuperEngine.html
+   ============================================ */
+
+:root {
+  --bg-main: #0a0c10;
+  --bg-card: rgba(18, 22, 32, 0.85);
+  --bg-input: #1a1f2c;
+  --border-dim: #262f44;
+  --text-main: #a4a9c3;
+  --text-bright: #e2e8f0;
+  --text-muted: #585d7b;
+  --accent-pink: #ff2a85;
+  --accent-orange: #d9531e;
+  --accent-purple: #9d4edd;
+  --accent-yellow: #f1a83a;
+  --accent-teal: #1cb5ac;
+  --accent-blue: #5c92a6;
+  --accent-green: #529442;
+  --accent-red: #ef4444;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+  --focus-ring: 0 0 0 3px rgba(92, 146, 166, 0.45);
+  --tap-min: 44px;
+}
+
+/* Reset & Base */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+/* Accessibility: reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
+
+/* Focus indicators */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 4px;
+}
+
+/* Screen-reader only */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* App Container */
+.app-container {
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  padding: 16px 16px 100px;
+  transform-origin: top center;
+  will-change: transform;
+  transition: transform 0.05s ease-out;
+}
+
+/* Header */
+.header-brand {
+  border: 1px solid var(--border-dim);
+  background: linear-gradient(135deg, #10121b 0%, #07090e 100%);
+  padding: 16px;
+  text-align: center;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+.header-brand::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+}
+.header-title {
+  font-size: clamp(1.3rem, 5vw, 1.5rem);
+  font-weight: 900;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #bdc5e4;
+  text-shadow: 0 0 10px rgba(189, 197, 228, 0.15);
+}
+.header-subtitle {
+  font-size: 0.65rem;
+  color: var(--accent-pink);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-top: 5px;
+  font-weight: 700;
+}
+.pulsating-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 1.5px;
+  margin-top: 8px;
+  display: block;
+  animation: titlePulseLoop 9s infinite ease-in-out;
+}
+@keyframes titlePulseLoop {
+  0%, 100% { color: #9d4edd; text-shadow: 0 0 8px rgba(157, 78, 221, 0.6); }
+  16% { color: #1cb5ac; text-shadow: 0 0 8px rgba(28, 181, 172, 0.6); }
+  33% { color: #529442; text-shadow: 0 0 8px rgba(82, 148, 66, 0.6); }
+  50% { color: #00f0ff; text-shadow: 0 0 8px rgba(0, 240, 255, 0.6); }
+  66% { color: #ff2a85; text-shadow: 0 0 8px rgba(255, 42, 133, 0.6); }
+  83% { color: #d9531e; text-shadow: 0 0 8px rgba(217, 83, 30, 0.6); }
+}
+
+/* Navigation */
+.navigation-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.nav-btn {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  color: var(--text-main);
+  padding: 12px 2px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  min-height: var(--tap-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-btn:hover, .nav-btn:focus-visible {
+  color: var(--text-bright);
+  background-color: #141824;
+}
+.nav-btn[aria-selected="true"] {
+  color: #ffffff;
+  background-color: #141824;
+}
+.nav-btn.mode-tattoo { border-bottom: 2px solid var(--accent-pink); }
+.nav-btn.mode-flash { border-bottom: 2px solid var(--accent-orange); }
+.nav-btn.mode-batch { border-bottom: 2px solid var(--text-bright); }
+.nav-btn.mode-mood { border-bottom: 2px solid var(--accent-purple); }
+.nav-btn.mode-voice { border-bottom: 2px solid var(--accent-teal); }
+.nav-btn.mode-history { border-bottom: 2px solid var(--accent-yellow); }
+.nav-btn.mode-promptgen { border-bottom: 2px solid var(--accent-blue); }
+    .nav-btn.mode-camera { border-bottom: 2px solid #00f0ff; }
+
+/* Engine Panels */
+.engine-panel {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+}
+.engine-panel.active-panel {
+  display: flex;
+}
+
+/* System Cards */
+.system-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  padding: 16px;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+.system-card.accent-pink { border-left: 3px solid var(--accent-pink); }
+.system-card.accent-orange { border-left: 3px solid var(--accent-orange); }
+.system-card.accent-purple { border-left: 3px solid var(--accent-purple); }
+.system-card.accent-blue { border-left: 3px solid var(--accent-blue); }
+.card-header-text {
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-bright);
+  margin-bottom: 6px;
+}
+.card-subheader-text {
+  font-size: 0.7rem;
+  color: var(--text-main);
+  line-height: 1.4;
+}
+
+/* Matrix / Chips */
+.matrix-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-bright);
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.matrix-counter {
+  font-size: 0.65rem;
+  color: var(--accent-pink);
+  font-weight: 800;
+  background: rgba(255, 42, 133, 0.1);
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+#panel-flash .matrix-counter { color: var(--accent-orange); background: rgba(217, 83, 30, 0.1); }
+#panel-mood .matrix-counter { color: var(--accent-purple); background: rgba(157, 78, 221, 0.1); }
+
+.matrix-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.chip {
+  background-color: rgba(20, 23, 34, 0.6);
+  border: 1px solid var(--border-dim);
+  padding: 12px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  transition: all 0.2s ease;
+  text-align: left;
+  min-height: var(--tap-min);
+}
+.chip:hover, .chip:focus-visible {
+  border-color: var(--text-muted);
+}
+.chip-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #7b819b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+.chip-subtitle {
+  font-size: 0.65rem;
+  color: #515670;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+}
+
+/* Selected chip states */
+.chip.selected { background: rgba(12, 13, 20, 0.9); }
+.chip.selected[data-color="pink"] { border-color: var(--accent-pink); box-shadow: inset 0 0 6px rgba(255,42,133,0.15); }
+.chip.selected[data-color="pink"] .chip-title { color: var(--accent-pink); }
+.chip.selected[data-color="magenta"] { border-color: var(--accent-pink); box-shadow: inset 0 0 6px rgba(255,42,133,0.15); }
+.chip.selected[data-color="magenta"] .chip-title { color: var(--accent-pink); }
+.chip.selected[data-color="orange"] { border-color: var(--accent-orange); box-shadow: inset 0 0 6px rgba(217,83,30,0.15); }
+.chip.selected[data-color="orange"] .chip-title { color: var(--accent-orange); }
+.chip.selected[data-color="purple"] { border-color: var(--accent-purple); box-shadow: inset 0 0 6px rgba(157,78,221,0.15); }
+.chip.selected[data-color="purple"] .chip-title { color: var(--accent-purple); }
+.chip.selected[data-color="yellow"] { border-color: var(--accent-yellow); box-shadow: inset 0 0 6px rgba(241,168,58,0.15); }
+.chip.selected[data-color="yellow"] .chip-title { color: var(--accent-yellow); }
+.chip.selected[data-color="teal"] { border-color: var(--accent-teal); box-shadow: inset 0 0 6px rgba(28,181,172,0.15); }
+.chip.selected[data-color="teal"] .chip-title { color: var(--accent-teal); }
+.chip.selected[data-color="blue"] { border-color: var(--accent-blue); box-shadow: inset 0 0 6px rgba(92,146,166,0.15); }
+.chip.selected[data-color="blue"] .chip-title { color: var(--accent-blue); }
+.chip.selected[data-color="green"] { border-color: var(--accent-green); box-shadow: inset 0 0 6px rgba(82,148,66,0.15); }
+.chip.selected[data-color="green"] .chip-title { color: var(--accent-green); }
+.chip.selected[data-color="red"] { border-color: var(--accent-red); box-shadow: inset 0 0 6px rgba(239,68,68,0.15); }
+.chip.selected[data-color="red"] .chip-title { color: var(--accent-red); }
+.chip.selected[data-color="dark"] { border-color: var(--text-bright); box-shadow: inset 0 0 6px rgba(226,232,240,0.15); }
+.chip.selected[data-color="dark"] .chip-title { color: var(--text-bright); }
+
+/* Placement Grid */
+.placement-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.placement-chip { padding: 12px; }
+
+/* Dropdowns */
+.dropdown-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 12px;
+}
+.dropdown-field {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-dim);
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: all 0.2s ease;
+  min-height: var(--tap-min);
+}
+.dropdown-field::after {
+  content: '▼';
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+}
+.dropdown-container.open .dropdown-field::after {
+  transform: rotate(180deg);
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 105%;
+  left: 0;
+  width: 100%;
+  background-color: #111522;
+  border: 1px solid var(--border-dim);
+  border-radius: 6px;
+  box-shadow: 0px 8px 24px rgba(0,0,0,0.6);
+  z-index: 1000;
+  max-height: 260px;
+  overflow-y: auto;
+}
+.dropdown-container.open .dropdown-content {
+  display: block;
+}
+.dropdown-item {
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  border-bottom: 1px solid #181f30;
+  font-size: 0.75rem;
+  color: var(--text-main);
+  transition: background 0.2s, color 0.2s;
+  min-height: var(--tap-min);
+}
+.dropdown-item:last-child { border-bottom: none; }
+.dropdown-item:hover, .dropdown-item:focus-visible {
+  background-color: #1a2336;
+  color: var(--text-bright);
+}
+
+/* Custom checkbox in dropdowns */
+.render-item input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.render-item {
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  user-select: none;
+}
+.checkmark {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  height: 18px;
+  width: 18px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 2px solid var(--text-muted);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.render-item:hover input ~ .checkmark,
+.render-item:focus-visible input ~ .checkmark {
+  border-color: var(--text-bright);
+}
+.render-item input:checked ~ .checkmark {
+  background-color: var(--accent-pink);
+  border-color: var(--accent-pink);
+}
+.checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.render-item input:checked ~ .checkmark::after {
+  display: block;
+}
+
+/* PromptGen Uploader */
+.textarea-uploader-wrapper {
+  position: relative;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-dim);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  gap: 12px;
+}
+.textarea-uploader-wrapper textarea {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  min-height: 110px;
+  padding: 10px;
+  color: var(--text-bright);
+  font-size: 0.8rem;
+  resize: none;
+  line-height: 1.4;
+  font-family: var(--font-sans);
+}
+.textarea-uploader-wrapper textarea:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+}
+.embedded-uploader-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: rgba(10, 12, 16, 0.85);
+  border: 1px dashed var(--accent-blue);
+  border-radius: 6px;
+  padding: 10px;
+}
+.uploader-trigger-label {
+  background-color: var(--accent-blue);
+  border: none;
+  color: #ffffff;
+  padding: 9px 14px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  width: 100%;
+  display: block;
+  transition: opacity 0.2s;
+  min-height: var(--tap-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.uploader-trigger-label:hover, .uploader-trigger-label:focus-visible {
+  opacity: 0.85;
+}
+.uploader-hint-text {
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  text-align: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.preview-thumbnail-deck {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 20px;
+  padding: 4px;
+  width: 100%;
+}
+.preview-thumbnail-deck:empty::before {
+  content: 'No images selected — tap button below';
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 6px 0;
+}
+.thumbnail-wrapper {
+  position: relative;
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+.thumbnail-preview-frame {
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--accent-blue);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 14px rgba(92,146,166,0.45);
+  background-color: #0d111a;
+}
+.thumbnail-preview-frame img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.thumbnail-remove-btn {
+  position: absolute;
+  top: -8px; right: -8px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--accent-red);
+  border: 2px solid var(--bg-main);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+  z-index: 10;
+  min-height: auto;
+}
+.thumbnail-remove-btn:hover, .thumbnail-remove-btn:focus-visible {
+  transform: scale(1.1);
+}
+
+/* Inputs */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.text-area-input {
+  width: 100%;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-dim);
+  border-radius: 6px;
+  padding: 14px;
+  color: var(--text-bright);
+  font-size: 0.8rem;
+  resize: none;
+  min-height: 85px;
+  line-height: 1.4;
+  font-family: var(--font-sans);
+}
+.text-area-input:focus {
+  outline: none;
+  border-color: var(--text-muted);
+}/* Summary Banners */
+.summary-banner {
+  background-color: rgba(255, 42, 133, 0.03);
+  border: 1px dashed rgba(255, 42, 133, 0.3);
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-bright);
+}
+.summary-banner.flash-variant {
+  background-color: rgba(217, 83, 30, 0.03);
+  border-color: rgba(217, 83, 30, 0.3);
+}
+.summary-banner.mood-variant {
+  background-color: rgba(157, 78, 221, 0.03);
+  border-color: rgba(157, 78, 221, 0.3);
+}
+.summary-banner.promptgen-variant {
+  background-color: rgba(92, 146, 166, 0.03);
+  border-color: rgba(92, 146, 166, 0.3);
+}
+
+/* Invoke Buttons */
+.invoke-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  min-height: var(--tap-min);
+}
+.invoke-btn:active { transform: scale(0.98); }
+.invoke-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn-pink { background-color: var(--accent-pink); }
+.btn-orange { background-color: var(--accent-orange); }
+.btn-purple { background-color: var(--accent-purple); }
+.btn-teal { background-color: var(--accent-teal); }
+.btn-blue { background-color: var(--accent-blue); }
+
+/* Output Wrappers */
+.output-wrapper {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+}
+.output-wrapper.active-output { display: flex; }
+.output-header {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-bright);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.code-container {
+  background-color: #05070a;
+  border: 1px solid var(--border-dim);
+  border-radius: 6px;
+  padding: 14px;
+  position: relative;
+  margin-bottom: 8px;
+}
+.code-block {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: #38bdf8;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin-bottom: 10px;
+}
+.output-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 4px;
+}
+.utility-btn {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  color: var(--text-bright);
+  padding: 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s;
+  min-height: var(--tap-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.utility-btn:hover, .utility-btn:focus-visible {
+  background-color: rgba(255,255,255,0.05);
+}
+
+/* Flash Cards */
+.flash-sheet-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.flash-card {
+  background-color: #0d111a;
+  border: 1px solid var(--border-dim);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+}
+.flash-card-header {
+  background-color: #141824;
+  padding: 10px 14px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-dim);
+}
+.flash-card-body {
+  padding: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #fb923c;
+  line-height: 1.4;
+  word-break: break-word;
+}
+.flash-card-footer {
+  padding: 8px 14px;
+  background-color: rgba(20, 24, 36, 0.5);
+  border-top: 1px solid rgba(38, 47, 68, 0.5);
+  display: flex;
+  justify-content: flex-end;
+}
+.flash-copy-btn {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-dim);
+  color: var(--text-bright);
+  padding: 6px 12px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 32px;
+}
+.flash-copy-btn:hover, .flash-copy-btn:focus-visible {
+  background-color: var(--border-dim);
+  color: #ffffff;
+}
+
+/* Mood Variant Cards */
+.mood-variant-card {
+  background-color: #111622;
+  border: 1px solid var(--border-dim);
+  border-radius: 6px;
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.mood-variant-title {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--accent-purple);
+  letter-spacing: 0.5px;
+}
+.mood-variant-content {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #c084fc;
+  line-height: 1.4;
+  word-break: break-word;
+  margin-bottom: 6px;
+}
+
+/* Consultation View */
+.consultation-view {
+  display: none;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 28px 20px;
+  border-radius: 6px;
+  flex-direction: column;
+  gap: 22px;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  margin: 0 auto;
+}
+.consultation-view.active-view { display: flex; }
+.cc-header {
+  border-bottom: 2px solid #000000;
+  padding-bottom: 14px;
+  text-align: center;
+}
+.cc-title {
+  font-size: 1.3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+.cc-subtitle {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  margin-top: 6px;
+  font-weight: 700;
+  color: #444444;
+}
+.cc-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.cc-section {
+  border: 1px solid #000000;
+  padding: 14px;
+  position: relative;
+}
+.cc-section-label {
+  position: absolute;
+  top: -8px; left: 12px;
+  background-color: #ffffff;
+  padding: 0 6px;
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.cc-text-block {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  font-weight: 500;
+  word-break: break-word;
+}
+.cc-field-row {
+  display: flex;
+  border-bottom: 1px dashed #cccccc;
+  padding: 8px 0;
+  font-size: 0.75rem;
+}
+.cc-field-label {
+  font-weight: 700;
+  width: 120px;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+.cc-qr-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+.cc-qr-box {
+  width: 95px; height: 95px;
+  border: 2px solid #000000;
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cc-qr-text {
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* Toast */
+.toast-overlay {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background-color: var(--accent-pink);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 30px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 99999;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  pointer-events: none;
+}
+.toast-overlay.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Zoom HUD */
+.zoom-hud {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #11131e;
+  border: 1px solid #222538;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  z-index: 10000;
+}
+.zoom-btn-element {
+  background: #171926;
+  border: 1px solid #2d314a;
+  color: var(--text-bright);
+  width: 34px;
+  height: 34px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: auto;
+}
+.zoom-btn-element:hover, .zoom-btn-element:focus-visible {
+  background: #1f2336;
+}
+.zoom-value-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-bright);
+  min-width: 52px;
+  text-align: center;
+  font-family: var(--font-mono);
+}
+
+/* History */
+.history-item {
+  border: 1px solid var(--border-dim);
+  background-color: #0d111a;
+  border-radius: 6px;
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.history-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.history-body {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-yellow);
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+/* Print Styles */
+@media print {
+  body { background: #ffffff; color: #000000; padding: 0; }
+  .app-container, .zoom-hud, .toast-overlay, .navigation-grid { display: none !important; }
+  .consultation-view {
+    display: flex !important;
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    max-width: 100%;
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .app-container { padding: 12px 12px 100px; gap: 12px; }
+  .header-title { font-size: 1.25rem; letter-spacing: 1.5px; }
+  .navigation-grid { grid-template-columns: repeat(3, 1fr); }
+  .nav-btn { font-size: 0.6rem; padding: 10px 2px; }
+  .placement-grid { grid-template-columns: 1fr; }
+  .output-actions-grid { grid-template-columns: 1fr; }
+  .zoom-hud { bottom: 12px; right: 12px; }
+}
+@media (max-width: 360px) {
+  .navigation-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ADD: modifiers sliders styling */
+#advanced-modifiers input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(90deg, rgba(157,78,221,0.45), rgba(92,146,166,0.45));
+  border-radius: 6px;
+  outline: none;
+}
+#advanced-modifiers input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid var(--accent-blue);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+#advanced-modifiers input[type="range"]::-moz-range-thumb {
+  width:18px; height:18px; border-radius:50%; background:#fff; border:3px solid var(--accent-blue);
+}
+
+/* === 4-CAMERA NAMESPACED === */
+#panel-camera { --neon-cyan:#0ff; --neon-magenta:#f0f; --neon-purple:#9d00ff; --neon-orange:#ff9d00; --neon-red:#ff003c; --bg:#0a0a0c; }
+#panel-camera * { box-sizing:border-box; margin:0; padding:0; }
+#panel-camera { background:transparent; color:#fff; font-family:'Courier New',monospace; -webkit-font-smoothing:antialiased; line-height:1.5; padding:0; width:100%; }
+#panel-camera .app { width:100%; max-width:520px; background:#121216; padding:24px; border-radius:20px; border:2px solid #333; box-shadow:inset 0 0 15px rgba(0,0,0,0.8),0 10px 30px rgba(0,0,0,0.5); margin:0 auto; }
+#panel-camera header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+#panel-camera .title-wrap{display:flex;align-items:center;gap:10px}
+#panel-camera .header-dot{width:12px;height:12px;border-radius:50%;background:var(--neon-cyan);box-shadow:0 0 10px var(--neon-cyan),0 0 20px rgba(0,255,255,.4);flex-shrink:0}
+#panel-camera h1{font-size:20px;font-weight:900;letter-spacing:.6px;color:var(--neon-cyan);text-shadow:0 0 10px var(--neon-cyan);text-align:center}
+#panel-camera .badge{background:#050505;border:1px solid var(--neon-purple);color:var(--neon-cyan);font-size:12px;font-weight:600;padding:4px 10px;border-radius:10px;box-shadow:inset 0 0 6px rgba(157,0,255,.4)}
+#panel-camera .pill{background:#050505;border:1px solid #333;color:var(--neon-cyan);font-size:12px;text-align:center;padding:8px 12px;border-radius:999px;margin:10px 0 18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:inset 0 0 8px rgba(157,0,255,.3)}
+#panel-camera .card{background:transparent;border:none;padding:0}
+#panel-camera .section{margin-bottom:20px}
+#panel-camera .label{display:block;font-size:11px;font-weight:700;letter-spacing:1px;color:var(--neon-cyan);margin-bottom:10px;text-transform:uppercase;text-shadow:0 0 5px rgba(0,255,255,.5)}
+#panel-camera select,#panel-camera textarea,#panel-camera button{font-family:inherit}
+#panel-camera .select-wrap{position:relative}
+#panel-camera select,#panel-camera textarea{width:100%;background:#050505;color:var(--neon-cyan);border:2px solid var(--neon-purple);border-radius:8px;padding:12px;box-shadow:inset 0 0 10px var(--neon-purple);outline:none;margin-bottom:15px;font-size:16px;transition:box-shadow .2s,border-color .2s}
+#panel-camera select{appearance:none;padding-right:40px;cursor:pointer}
+#panel-camera select:focus,#panel-camera textarea:focus{border-color:var(--neon-cyan);box-shadow:inset 0 0 12px var(--neon-cyan)}
+#panel-camera .select-wrap::after{content:"";position:absolute;right:14px;top:50%;width:14px;height:14px;transform:translateY(-50%);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2300ffff' stroke-width='2' stroke-linecap='round' %3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;pointer-events:none;opacity:.9;filter:drop-shadow(0 0 4px #0ff)}
+#panel-camera optgroup{background:#0a0a0c;color:var(--neon-magenta);font-style:normal;font-weight:700}
+#panel-camera option{background:#050505;color:#e2e8f0;padding:6px}
+#panel-camera .guardians{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;padding:0 4px}
+#panel-camera .g-item{display:flex;align-items:center;justify-content:center;gap:7px;font-size:12px;font-weight:700;letter-spacing:.5px;color:#6b7d94}
+#panel-camera .g-dot{width:9px;height:9px;border-radius:50%;background:#334155;opacity:.35;transition:all .25s ease;flex-shrink:0}
+#panel-camera .g-dot.active.lunara{background:#c0c0c0;opacity:1;box-shadow:0 0 8px rgba(192,192,192,.7)}
+#panel-camera .g-dot.active.aethon{background:var(--neon-purple);opacity:1;box-shadow:0 0 8px var(--neon-purple)}
+#panel-camera .g-dot.active.solaris{background:var(--neon-orange);opacity:1;box-shadow:0 0 10px var(--neon-orange)}
+#panel-camera .check-row{display:flex;align-items:center;gap:10px;margin:14px 0 6px}
+#panel-camera input[type="checkbox"]{width:18px;height:18px;accent-color:var(--neon-magenta);cursor:pointer;flex-shrink:0}
+#panel-camera .check-row label{font-size:14px;color:#b8c6d6;cursor:pointer;user-select:none}
+#panel-camera textarea::placeholder{color:#5a6e85}
+#panel-camera #subject{min-height:115px;font-family:'Courier New',monospace;border:2px solid var(--neon-cyan);box-shadow:inset 0 0 10px var(--neon-cyan),0 0 5px rgba(0,255,255,.3)}
+#panel-camera #subject:focus{box-shadow:inset 0 0 12px var(--neon-cyan),0 0 8px rgba(0,255,255,.5)}
+#panel-camera #output{min-height:150px;font-family:'Courier New',monospace;background:#050505}
+#panel-camera button{width:100%;padding:15px;border:none;border-radius:8px;font-weight:900;text-transform:uppercase;cursor:pointer;margin-bottom:10px;transition:.3s;box-shadow:0 0 10px var(--neon-magenta),inset 0 0 5px #fff}
+#panel-camera .btn-generate,#panel-camera #generate{background:var(--neon-magenta);color:#000;border:2px solid var(--neon-cyan);margin:8px 0 22px;box-shadow:0 0 10px var(--neon-magenta),inset 0 0 5px #fff}
+#panel-camera .btn-generate:hover,#panel-camera #generate:hover{filter:brightness(1.5);box-shadow:0 0 20px var(--neon-cyan);transform:translateY(-1px)}
+#panel-camera .btn-generate:active,#panel-camera #generate:active{transform:translateY(1px)}
+#panel-camera .btn-copy,#panel-camera #copy{background:var(--neon-orange);color:#000;border:2px solid var(--neon-red);box-shadow:0 0 10px var(--neon-orange),inset 0 0 5px #fff;margin-top:10px;padding:12px;font-size:14px}
+#panel-camera .btn-copy:hover,#panel-camera #copy:hover{filter:brightness(1.5);box-shadow:0 0 20px var(--neon-orange)}
+#panel-camera .divider{height:1px;background:#333;margin:16px 0;opacity:.8;box-shadow:0 0 6px var(--neon-purple)}
+@media (max-width:390px){#panel-camera h1{font-size:18px}#panel-camera .pill{font-size:11px;padding:7px 10px}#panel-camera .app{padding:20px 16px;border-radius:18px}#panel-camera .g-item{font-size:11px;gap:5px}}
+
+</style>
+</head>
+<body>
+
+<main class="app-container" id="mainAppStructure">
+  <header class="header-brand">
+    <h1 class="header-title">Guardian Engine</h1>
+    <p class="header-subtitle">Arcanea × Oracle Systems V2.0</p>
+    <span class="pulsating-title">Benneig Tattoo Prompt Generator</span>
+  </header>
+
+  <nav class="navigation-grid" role="tablist" aria-label="Engine Modules">
+    <button type="button" class="nav-btn active mode-tattoo" role="tab" id="tab-tattoo" aria-selected="true" aria-controls="panel-tattoo" onclick="switchEngineMode('tattoo', this)">Tattoo</button>
+    <button type="button" class="nav-btn mode-flash" role="tab" id="tab-flash" aria-selected="false" aria-controls="panel-flash" onclick="switchEngineMode('flash', this)">Flash</button>
+    <button type="button" class="nav-btn mode-batch" role="tab" id="tab-batch" aria-selected="false" aria-controls="panel-batch" onclick="switchEngineMode('batch', this)">Batch</button>
+    <button type="button" class="nav-btn mode-mood" role="tab" id="tab-mood" aria-selected="false" aria-controls="panel-mood" onclick="switchEngineMode('mood', this)">Mood Board</button>
+    <button type="button" class="nav-btn mode-voice" role="tab" id="tab-voice" aria-selected="false" aria-controls="panel-voice" onclick="switchEngineMode('voice', this)">Voice</button>
+    <button type="button" class="nav-btn mode-history" role="tab" id="tab-history" aria-selected="false" aria-controls="panel-history" onclick="switchEngineMode('history', this)">History</button>
+    <button type="button" class="nav-btn mode-promptgen" role="tab" id="tab-promptgen" aria-selected="false" aria-controls="panel-promptgen" onclick="switchEngineMode('promptgen', this)">PromptGen</button>
+        <button class="nav-btn mode-camera" data-mode="camera" onclick="switchEngineMode('camera', this)" id="tab-camera" role="tab" aria-controls="panel-camera" aria-selected="false">4-CAMERA</button>
+  </nav>
+
+  <!-- TATTOO PANEL -->
+  <section id="panel-tattoo" class="engine-panel active-panel" role="tabpanel" aria-labelledby="tab-tattoo">
+    <div class="system-card accent-pink">
+      <h2 class="card-header-text">Tattoo Prompt Studio</h2>
+      <p class="card-subheader-text">Specialized multi-preset translation pipeline for custom body-art asset formulation.</p>
+    </div>
+
+    <div>
+      <h3 class="matrix-title">Style Presets <span class="matrix-counter" id="count-presets">0 selected</span></h3>
+      <div class="matrix-grid">
+        <button type="button" class="chip" data-color="dark" aria-pressed="false" onclick="toggleChipSelection(this, 'presets')">
+          <span class="chip-title">🌘 Dark</span>
+          <span class="chip-subtitle">Shadow · Void</span>
+        </button>
+        <button type="button" class="chip" data-color="blue" aria-pressed="false" onclick="toggleChipSelection(this, 'presets')">
+          <span class="chip-title">✨ Celestial</span>
+          <span class="chip-subtitle">Aether · Radiant</span>
+        </button>
+        <button type="button" class="chip" data-color="red" aria-pressed="false" onclick="toggleChipSelection(this, 'presets')">
+          <span class="chip-title">🪵 Tribal</span>
+          <span class="chip-subtitle">Earth · Ancestry</span>
+        </button>
+        <button type="button" class="chip" data-color="purple" aria-pressed="false" onclick="toggleChipSelection(this, 'presets')">
+          <span class="chip-title">👻 Ethereal</span>
+          <span class="chip-subtitle">Spirit · Light</span>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="matrix-title">Tattoo Styles <span class="matrix-counter" id="count-styles">0 selected</span></h3>
+      <div class="matrix-grid">
+        <button type="button" class="chip" data-color="magenta" aria-pressed="false" onclick="toggleChipSelection(this, 'styles')">
+          <span class="chip-title">⛩️ Japanese Traditional</span>
+          <span class="chip-subtitle">Irezumi Outlines</span>
+        </button>
+        <button type="button" class="chip" data-color="orange" aria-pressed="false" onclick="toggleChipSelection(this, 'styles')">
+          <span class="chip-title">🦅 American Traditional</span>
+          <span class="chip-subtitle">Bold Lines · Solid Fill</span>
+        </button>
+        <button type="button" class="chip" data-color="blue" aria-pressed="false" onclick="toggleChipSelection(this, 'styles')">
+          <span class="chip-title">🤖 Biomechanical</span>
+          <span class="chip-subtitle">Anatomy · Cyber-Form Matrix</span>
+        </button>
+        <button type="button" class="chip" data-color="purple" aria-pressed="false" onclick="toggleChipSelection(this, 'styles')">
+          <span class="chip-title">✍️ Script / Typography</span>
+          <span class="chip-subtitle">Calligraphy Lineage Call</span>
+        </button>        <button type="button" class="chip" data-color="green" aria-pressed="false" onclick="toggleChipSelection(this, 'styles')">
+          <span class="chip-title">🌸 Floral Structural</span>
+          <span class="chip-subtitle">Botanical Geometry</span>
+        </button>
+        <button type="button" class="chip" data-color="dark" aria-pressed="false" onclick="toggleChipSelection(this, 'styles')">
+          <span class="chip-title">🌓 Black and Grey</span>
+          <span class="chip-subtitle">Smooth Shading Shards</span>
+        </button>
+        <button type="button" class="chip" data-color="teal" aria-pressed="false" onclick="toggleChipSelection(this, 'styles')">
+          <span class="chip-title">🎨 Full Color</span>
+          <span class="chip-subtitle">Vibrant Saturation Matrix</span>
+        </button>
+        <button type="button" class="chip" data-color="yellow" aria-pressed="false" onclick="toggleChipSelection(this, 'styles')">
+          <span class="chip-title">📐 Geometric</span>
+          <span class="chip-subtitle">Sacred Math · Symmetry Lines</span>
+        </button>
+        <button type="button" class="chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'styles')">
+          <span class="chip-title">✏️ Pure Stencil Outline Formatting</span>
+          <span class="chip-subtitle">High Contrast Transfer Outline</span>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="matrix-title">Body Placement Matrix <span class="matrix-counter" id="count-placement">0 selected</span></h3>
+      <div class="matrix-grid placement-grid">
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">💪 Forearm</span>
+          <span class="chip-subtitle">Medium Format</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">⚡ Sleeve</span>
+          <span class="chip-subtitle">Full Arm Array</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🪐 Back Suit</span>
+          <span class="chip-subtitle">Full Master Suite</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🏺 Neck Line</span>
+          <span class="chip-subtitle">High Exposure</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🦵 Leg Sleeve</span>
+          <span class="chip-subtitle">Lower Limbs Array</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🦶 Ankle</span>
+          <span class="chip-subtitle">Detailed Micro Canvas</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">⌚ Wrist</span>
+          <span class="chip-subtitle">High Visibility Focal</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🛡️ Chest</span>
+          <span class="chip-subtitle">Broad Front Panel</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🧣 Neck</span>
+          <span class="chip-subtitle">Symmetrical Collar Profiles</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🌓 Half Sleeve</span>
+          <span class="chip-subtitle">Upper Arm Balance</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">✋ Hand</span>
+          <span class="chip-subtitle">Extremity Focal Matrix</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🍑 Butt</span>
+          <span class="chip-subtitle">Gluteal Contour Wrapper</span>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="matrix-title">Art Medium Parameters</h3>
+      <div class="dropdown-container" id="artMediumDropdownContainer">
+        <button type="button" class="dropdown-field render-dropdown-field" aria-expanded="false" aria-haspopup="true" aria-controls="artMediumDropdownMenu" onclick="toggleDropdownMenu(event)">
+          <span id="label-art-medium">-Select Medium-</span>
+        </button>
+        <div class="dropdown-content" id="artMediumDropdownMenu" role="group" aria-label="Art Medium Options">
+          <label class="dropdown-item render-item">Digital Oil Painting<input type="checkbox" name="artMediums" value="Digital Oil Painting" onchange="updateSelectedMediums('artMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Photorealistic 3D Render<input type="checkbox" name="artMediums" value="Photorealistic 3D Render" onchange="updateSelectedMediums('artMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Watercolor<input type="checkbox" name="artMediums" value="Watercolor" onchange="updateSelectedMediums('artMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Pen & Ink Illustration<input type="checkbox" name="artMediums" value="Pen & Ink Illustration" onchange="updateSelectedMediums('artMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Mixed Media<input type="checkbox" name="artMediums" value="Mixed Media" onchange="updateSelectedMediums('artMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Charcoal Digital<input type="checkbox" name="artMediums" value="Charcoal Digital" onchange="updateSelectedMediums('artMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Gouache<input type="checkbox" name="artMediums" value="Gouache" onchange="updateSelectedMediums('artMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Airbrush<input type="checkbox" name="artMediums" value="Airbrush" onchange="updateSelectedMediums('artMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Concept Art<input type="checkbox" name="artMediums" value="Concept Art" onchange="updateSelectedMediums('artMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Neo-surealism<input type="checkbox" name="artMediums" value="Neo-surealism" onchange="updateSelectedMediums('artMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Baroque<input type="checkbox" name="artMediums" value="Baroque" onchange="updateSelectedMediums('artMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+        </div>
+      </div>
+
+      <h3 class="matrix-title">Render Target Configuration</h3>
+      <div class="dropdown-container" id="renderTargetDropdownContainer">
+        <button type="button" class="dropdown-field render-dropdown-field" aria-expanded="false" aria-haspopup="true" aria-controls="renderTargetDropdownMenu" onclick="toggleDropdownMenu(event)">
+          <span id="label-render-target">— Select Render —</span>
+        </button>
+        <div class="dropdown-content" id="renderTargetDropdownMenu" role="group" aria-label="Render Target Options">
+          <label class="dropdown-item render-item">Unreal Engine 5, 8K<input type="checkbox" name="renderTargets" value="Unreal Engine 5, 8K" onchange="updateSelectedMediums('renderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Octane Render 4K<input type="checkbox" name="renderTargets" value="Octane Render 4K" onchange="updateSelectedMediums('renderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">v-Ray Photorealistic<input type="checkbox" name="renderTargets" value="v-Ray Photorealistic" onchange="updateSelectedMediums('renderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Cinema 4D + Redshift<input type="checkbox" name="renderTargets" value="Cinema 4D + Redshift" onchange="updateSelectedMediums('renderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Blender Cycles<input type="checkbox" name="renderTargets" value="Blender Cycles" onchange="updateSelectedMediums('renderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Midjourney v6 quality<input type="checkbox" name="renderTargets" value="Midjourney v6 quality" onchange="updateSelectedMediums('renderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">SDXL Ultra, 4K<input type="checkbox" name="renderTargets" value="SDXL Ultra, 4K" onchange="updateSelectedMediums('renderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Stable Diffusion<input type="checkbox" name="renderTargets" value="Stable Diffusion" onchange="updateSelectedMediums('renderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label for="input-tattoo-concept" class="matrix-title">Concept Vector Input</label>
+      <textarea class="text-area-input" id="input-tattoo-concept" placeholder="Describe the focus elements, core symbolism or item layers..." oninput="evaluateInputState('tattoo')" aria-describedby="summary-tattoo"></textarea>
+    </div>
+
+    <div class="summary-banner" id="summary-tattoo">Select options and enter a concept to preview compilation layout...</div>
+    <button type="button" class="invoke-btn btn-pink" id="btn-invoke-tattoo" disabled onclick="executePromptGeneration('tattoo')">Invoke Prompt Studio</button>
+
+    <div class="output-wrapper" id="output-box-tattoo">
+      <h3 class="output-header">Forged Prompt Output <span>Engine: Pyraxis</span></h3>
+      <div id="variations-container-tattoo">
+        <div class="code-container">
+          <div style="font-size:0.6rem; color:var(--accent-pink); font-weight:bold; margin-bottom:4px;">VARIATION #1</div>
+          <pre class="code-block" id="text-output-tattoo-1"></pre>
+          <div class="output-actions-grid">
+            <button type="button" class="utility-btn" onclick="copyPromptToClipboard('text-output-tattoo-1')">Copy Var 1</button>
+            <button type="button" class="utility-btn" onclick="navigateToConsultationCard(1)">Consult Spec</button>
+          </div>
+        </div>
+        <div class="code-container">
+          <div style="font-size:0.6rem; color:var(--accent-pink); font-weight:bold; margin-bottom:4px;">VARIATION #2</div>
+          <pre class="code-block" id="text-output-tattoo-2"></pre>
+          <div class="output-actions-grid">
+            <button type="button" class="utility-btn" onclick="copyPromptToClipboard('text-output-tattoo-2')">Copy Var 2</button>
+            <button type="button" class="utility-btn" onclick="navigateToConsultationCard(2)">Consult Spec</button>
+          </div>
+        </div>
+        <div class="code-container">
+          <div style="font-size:0.6rem; color:var(--accent-pink); font-weight:bold; margin-bottom:4px;">VARIATION #3</div>
+          <pre class="code-block" id="text-output-tattoo-3"></pre>
+          <div class="output-actions-grid">
+            <button type="button" class="utility-btn" onclick="copyPromptToClipboard('text-output-tattoo-3')">Copy Var 3</button>
+            <button type="button" class="utility-btn" onclick="navigateToConsultationCard(3)">Consult Spec</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLASH PANEL -->
+  <section id="panel-flash" class="engine-panel" role="tabpanel" aria-labelledby="tab-flash" hidden>
+    <div class="system-card accent-orange">
+      <h2 class="card-header-text">Tattoo Flash Generator</h2>
+      <p class="card-subheader-text">Assembles an 8-piece flash matrix sheet layout consisting of core heroes, panel variations, accents, and linework studies.</p>
+    </div>
+    <div>
+      <h3 class="matrix-title">Flash Cluster Styles <span class="matrix-counter" id="count-flash-styles">0 selected</span></h3>
+      <div class="matrix-grid">
+        <button type="button" class="chip" data-color="orange" aria-pressed="false" onclick="toggleChipSelection(this, 'flash-styles')"><span class="chip-title">🦅 American Traditional</span><span class="chip-subtitle">Bold Outline Paradigm</span></button>
+        <button type="button" class="chip" data-color="orange" aria-pressed="false" onclick="toggleChipSelection(this, 'flash-styles')"><span class="chip-title">⛩️ Japanese Traditional</span><span class="chip-subtitle">Oriental Core Formats</span></button>
+        <button type="button" class="chip" data-color="orange" aria-pressed="false" onclick="toggleChipSelection(this, 'flash-styles')"><span class="chip-title">🔮 Neo-Traditional</span><span class="chip-subtitle">Vivid Dimension Gradients</span></button>
+        <button type="button" class="chip" data-color="orange" aria-pressed="false" onclick="toggleChipSelection(this, 'flash-styles')"><span class="chip-title">🦅 Blackwork/Dark</span><span class="chip-subtitle">Heavy Ink Occultism</span></button>
+        <button type="button" class="chip" data-color="blue" aria-pressed="false" onclick="toggleChipSelection(this, 'flash-styles')"><span class="chip-title">🤖 Biomechanical</span><span class="chip-subtitle">Anatomy · Cyber-Form Matrix</span></button>
+        <button type="button" class="chip" data-color="purple" aria-pressed="false" onclick="toggleChipSelection(this, 'flash-styles')"><span class="chip-title">✍️ Script/ Typography</span><span class="chip-subtitle">Calligraphy Lineage Layout</span></button>
+        <button type="button" class="chip" data-color="green" aria-pressed="false" onclick="toggleChipSelection(this, 'flash-styles')"><span class="chip-title">🌸 Floral Structural</span><span class="chip-subtitle">Botanical Symmetry Elements</span></button>
+        <button type="button" class="chip" data-color="teal" aria-pressed="false" onclick="toggleChipSelection(this, 'flash-styles')"><span class="chip-title">🎨 Full Color</span><span class="chip-subtitle">Vibrant Saturation Array</span></button>
+        <button type="button" class="chip" data-color="yellow" aria-pressed="false" onclick="toggleChipSelection(this, 'flash-styles')"><span class="chip-title">📐 Geometric</span><span class="chip-subtitle">Sacred Math Framework</span></button>
+        <button type="button" class="chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'flash-styles')"><span class="chip-title">✏️ Pure Stencil Outline Formatting</span><span class="chip-subtitle">High Contrast Output Path</span></button>
+        <button type="button" class="chip" data-color="dark" aria-pressed="false" onclick="toggleChipSelection(this, 'flash-styles')"><span class="chip-title">🌓 Black & Grey</span><span class="chip-subtitle">Smooth Charcoal Shading</span></button>
+        <button type="button" class="chip" data-color="red" aria-pressed="false" onclick="toggleChipSelection(this, 'flash-styles')"><span class="chip-title">👤 Portraiture</span><span class="chip-subtitle">Realistic Silhouette Focus</span></button>
+      </div>
+    </div>
+    <div class="input-group">
+      <label for="input-flash-concept" class="matrix-title">Overarching Flash Theme</label>
+      <textarea class="text-area-input" id="input-flash-concept" placeholder="E.g., Stars and eagles, nautical voyages, floral occult..." oninput="evaluateInputState('flash')" aria-describedby="summary-flash"></textarea>
+    </div>
+    <div class="summary-banner flash-variant" id="summary-flash">Enter theme vector to formulate the 8-piece composition breakdown structure.</div>
+    <button type="button" class="invoke-btn btn-orange" id="btn-invoke-flash" disabled onclick="executePromptGeneration('flash')">Generate Flash Sheet</button>
+    <div class="output-wrapper" id="output-box-flash">
+      <h3 class="output-header">Generated Flash Matrix Suite</h3>
+      <div class="flash-sheet-container" id="container-flash-cards"></div>
+    </div>
+  
+<h3 class="matrix-title">Style Presets <span class="matrix-counter" id="count-presets-flash">0 selected</span></h3>
+      <div class="matrix-grid">
+        <button type="button" class="chip" data-color="dark" aria-pressed="false" onclick="toggleChipSelection(this, 'presets-flash')">
+          <span class="chip-title">🌘 Dark</span>
+          <span class="chip-subtitle">Shadow · Void</span>
+        </button>
+        <button type="button" class="chip" data-color="blue" aria-pressed="false" onclick="toggleChipSelection(this, 'presets-flash')">
+          <span class="chip-title">✨ Celestial</span>
+          <span class="chip-subtitle">Aether · Radiant</span>
+        </button>
+        <button type="button" class="chip" data-color="red" aria-pressed="false" onclick="toggleChipSelection(this, 'presets-flash')">
+          <span class="chip-title">🪵 Tribal</span>
+          <span class="chip-subtitle">Earth · Ancestry</span>
+        </button>
+        <button type="button" class="chip" data-color="purple" aria-pressed="false" onclick="toggleChipSelection(this, 'presets-flash')">
+          <span class="chip-title">👻 Ethereal</span>
+          <span class="chip-subtitle">Spirit · Light</span>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="matrix-title">Tattoo Styles <span class="matrix-counter" id="count-styles-flash">0 selected</span></h3>
+      <div class="matrix-grid">
+        <button type="button" class="chip" data-color="magenta" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-flash')">
+          <span class="chip-title">⛩️ Japanese Traditional</span>
+          <span class="chip-subtitle">Irezumi Outlines</span>
+        </button>
+        <button type="button" class="chip" data-color="orange" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-flash')">
+          <span class="chip-title">🦅 American Traditional</span>
+          <span class="chip-subtitle">Bold Lines · Solid Fill</span>
+        </button>
+        <button type="button" class="chip" data-color="blue" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-flash')">
+          <span class="chip-title">🤖 Biomechanical</span>
+          <span class="chip-subtitle">Anatomy · Cyber-Form Matrix</span>
+        </button>
+        <button type="button" class="chip" data-color="purple" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-flash')">
+          <span class="chip-title">✍️ Script / Typography</span>
+          <span class="chip-subtitle">Calligraphy Lineage Call</span>
+        </button>        <button type="button" class="chip" data-color="green" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-flash')">
+          <span class="chip-title">🌸 Floral Structural</span>
+          <span class="chip-subtitle">Botanical Geometry</span>
+        </button>
+        <button type="button" class="chip" data-color="dark" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-flash')">
+          <span class="chip-title">🌓 Black and Grey</span>
+          <span class="chip-subtitle">Smooth Shading Shards</span>
+        </button>
+        <button type="button" class="chip" data-color="teal" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-flash')">
+          <span class="chip-title">🎨 Full Color</span>
+          <span class="chip-subtitle">Vibrant Saturation Matrix</span>
+        </button>
+        <button type="button" class="chip" data-color="yellow" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-flash')">
+          <span class="chip-title">📐 Geometric</span>
+          <span class="chip-subtitle">Sacred Math · Symmetry Lines</span>
+        </button>
+        <button type="button" class="chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-flash')">
+          <span class="chip-title">✏️ Pure Stencil Outline Formatting</span>
+          <span class="chip-subtitle">High Contrast Transfer Outline</span>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="matrix-title">Body Placement Matrix <span class="matrix-counter" id="count-placement">0 selected</span></h3>
+      <div class="matrix-grid placement-grid">
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">💪 Forearm</span>
+          <span class="chip-subtitle">Medium Format</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">⚡ Sleeve</span>
+          <span class="chip-subtitle">Full Arm Array</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🪐 Back Suit</span>
+          <span class="chip-subtitle">Full Master Suite</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🏺 Neck Line</span>
+          <span class="chip-subtitle">High Exposure</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🦵 Leg Sleeve</span>
+          <span class="chip-subtitle">Lower Limbs Array</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🦶 Ankle</span>
+          <span class="chip-subtitle">Detailed Micro Canvas</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">⌚ Wrist</span>
+          <span class="chip-subtitle">High Visibility Focal</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🛡️ Chest</span>
+          <span class="chip-subtitle">Broad Front Panel</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🧣 Neck</span>
+          <span class="chip-subtitle">Symmetrical Collar Profiles</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🌓 Half Sleeve</span>
+          <span class="chip-subtitle">Upper Arm Balance</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">✋ Hand</span>
+          <span class="chip-subtitle">Extremity Focal Matrix</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🍑 Butt</span>
+          <span class="chip-subtitle">Gluteal Contour Wrapper</span>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      
+
+<h3 class="matrix-title">Art Medium Parameters</h3>
+      <div class="dropdown-container" id="artMediumDropdownContainer-flash">
+        <button type="button" class="dropdown-field render-dropdown-field" aria-expanded="false" aria-haspopup="true" aria-controls="artMediumDropdownMenu-flash" onclick="toggleDropdownMenu(event)">
+          <span id="label-art-medium-flash">-Select Medium-</span>
+        </button>
+        <div class="dropdown-content" id="artMediumDropdownMenu-flash" role="group" aria-label="Art Medium Options">
+          <label class="dropdown-item render-item">Digital Oil Painting<input type="checkbox" name="artMediums" value="Digital Oil Painting" onchange="updateSelectedMediums('artMediumDropdownContainer-flash', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Photorealistic 3D Render<input type="checkbox" name="artMediums" value="Photorealistic 3D Render" onchange="updateSelectedMediums('artMediumDropdownContainer-flash', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Watercolor<input type="checkbox" name="artMediums" value="Watercolor" onchange="updateSelectedMediums('artMediumDropdownContainer-flash', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Pen & Ink Illustration<input type="checkbox" name="artMediums" value="Pen & Ink Illustration" onchange="updateSelectedMediums('artMediumDropdownContainer-flash', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Mixed Media<input type="checkbox" name="artMediums" value="Mixed Media" onchange="updateSelectedMediums('artMediumDropdownContainer-flash', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Charcoal Digital<input type="checkbox" name="artMediums" value="Charcoal Digital" onchange="updateSelectedMediums('artMediumDropdownContainer-flash', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Gouache<input type="checkbox" name="artMediums" value="Gouache" onchange="updateSelectedMediums('artMediumDropdownContainer-flash', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Airbrush<input type="checkbox" name="artMediums" value="Airbrush" onchange="updateSelectedMediums('artMediumDropdownContainer-flash', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Concept Art<input type="checkbox" name="artMediums" value="Concept Art" onchange="updateSelectedMediums('artMediumDropdownContainer-flash', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Neo-surealism<input type="checkbox" name="artMediums" value="Neo-surealism" onchange="updateSelectedMediums('artMediumDropdownContainer-flash', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Baroque<input type="checkbox" name="artMediums" value="Baroque" onchange="updateSelectedMediums('artMediumDropdownContainer-flash', '-Select Medium-')"><span class="checkmark"></span></label>
+        </div>
+      </div>
+
+      <h3 class="matrix-title">Render Target Configuration</h3>
+      <div class="dropdown-container" id="renderTargetDropdownContainer-flash">
+        <button type="button" class="dropdown-field render-dropdown-field" aria-expanded="false" aria-haspopup="true" aria-controls="renderTargetDropdownMenu-flash" onclick="toggleDropdownMenu(event)">
+          <span id="label-render-target-flash">— Select Render —</span>
+        </button>
+        <div class="dropdown-content" id="renderTargetDropdownMenu-flash" role="group" aria-label="Render Target Options">
+          <label class="dropdown-item render-item">Unreal Engine 5, 8K<input type="checkbox" name="renderTargets" value="Unreal Engine 5, 8K" onchange="updateSelectedMediums('renderTargetDropdownContainer-flash', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Octane Render 4K<input type="checkbox" name="renderTargets" value="Octane Render 4K" onchange="updateSelectedMediums('renderTargetDropdownContainer-flash', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">v-Ray Photorealistic<input type="checkbox" name="renderTargets" value="v-Ray Photorealistic" onchange="updateSelectedMediums('renderTargetDropdownContainer-flash', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Cinema 4D + Redshift<input type="checkbox" name="renderTargets" value="Cinema 4D + Redshift" onchange="updateSelectedMediums('renderTargetDropdownContainer-flash', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Blender Cycles<input type="checkbox" name="renderTargets" value="Blender Cycles" onchange="updateSelectedMediums('renderTargetDropdownContainer-flash', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Midjourney v6 quality<input type="checkbox" name="renderTargets" value="Midjourney v6 quality" onchange="updateSelectedMediums('renderTargetDropdownContainer-flash', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">SDXL Ultra, 4K<input type="checkbox" name="renderTargets" value="SDXL Ultra, 4K" onchange="updateSelectedMediums('renderTargetDropdownContainer-flash', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Stable Diffusion<input type="checkbox" name="renderTargets" value="Stable Diffusion" onchange="updateSelectedMediums('renderTargetDropdownContainer-flash', '— Select Render —')"><span class="checkmark"></span></label>
+        </div>
+      </div>
+</section>
+
+  <!-- BATCH PANEL -->
+  <section id="panel-batch" class="engine-panel" role="tabpanel" aria-labelledby="tab-batch" hidden>
+    <div class="system-card" style="border-left: 3px solid var(--text-bright);">
+      <h2 class="card-header-text">Batch Prompt Matrix</h2>
+      <p class="card-subheader-text">Generates 8 distinct visual variations from a single baseline prompt vector mix.</p>
+    </div>
+    <div class="input-group">
+      <label for="input-batch-concept" class="matrix-title">Core Theme Baseline</label>
+      <textarea class="text-area-input" id="input-batch-concept" placeholder="Enter target focus subject..." oninput="evaluateInputState('batch')" aria-describedby="summary-batch"></textarea>
+    </div>
+    <div class="summary-banner" id="summary-batch" style="background-color: rgba(226,232,240,0.03); border-color: rgba(226,232,240,0.3);">Enter a core theme to generate 8 distinct style variations.</div>
+    <button type="button" class="invoke-btn" style="background-color: #2e3549;" id="btn-invoke-batch" disabled onclick="executePromptGeneration('batch')">Execute Batch Run</button>
+    <div class="output-wrapper" id="output-box-batch">
+      <h3 class="output-header">
+        <span>Batch Outputs Matrix</span>
+        <button type="button" class="flash-copy-btn" style="border-color: var(--text-bright); color: var(--text-bright);" onclick="copyAllBatchPrompts()">Copy All 8 Nodes</button>
+      </h3>
+      <div class="flash-sheet-container" id="container-batch-cards"></div>
+    </div>
+  
+<h3 class="matrix-title">Art Medium Parameters</h3>
+      <div class="dropdown-container" id="artMediumDropdownContainer-batch">
+        <button type="button" class="dropdown-field render-dropdown-field" aria-expanded="false" aria-haspopup="true" aria-controls="artMediumDropdownMenu-batch" onclick="toggleDropdownMenu(event)">
+          <span id="label-art-medium-batch">-Select Medium-</span>
+        </button>
+        <div class="dropdown-content" id="artMediumDropdownMenu-batch" role="group" aria-label="Art Medium Options">
+          <label class="dropdown-item render-item">Digital Oil Painting<input type="checkbox" name="artMediums" value="Digital Oil Painting" onchange="updateSelectedMediums('artMediumDropdownContainer-batch', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Photorealistic 3D Render<input type="checkbox" name="artMediums" value="Photorealistic 3D Render" onchange="updateSelectedMediums('artMediumDropdownContainer-batch', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Watercolor<input type="checkbox" name="artMediums" value="Watercolor" onchange="updateSelectedMediums('artMediumDropdownContainer-batch', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Pen & Ink Illustration<input type="checkbox" name="artMediums" value="Pen & Ink Illustration" onchange="updateSelectedMediums('artMediumDropdownContainer-batch', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Mixed Media<input type="checkbox" name="artMediums" value="Mixed Media" onchange="updateSelectedMediums('artMediumDropdownContainer-batch', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Charcoal Digital<input type="checkbox" name="artMediums" value="Charcoal Digital" onchange="updateSelectedMediums('artMediumDropdownContainer-batch', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Gouache<input type="checkbox" name="artMediums" value="Gouache" onchange="updateSelectedMediums('artMediumDropdownContainer-batch', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Airbrush<input type="checkbox" name="artMediums" value="Airbrush" onchange="updateSelectedMediums('artMediumDropdownContainer-batch', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Concept Art<input type="checkbox" name="artMediums" value="Concept Art" onchange="updateSelectedMediums('artMediumDropdownContainer-batch', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Neo-surealism<input type="checkbox" name="artMediums" value="Neo-surealism" onchange="updateSelectedMediums('artMediumDropdownContainer-batch', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Baroque<input type="checkbox" name="artMediums" value="Baroque" onchange="updateSelectedMediums('artMediumDropdownContainer-batch', '-Select Medium-')"><span class="checkmark"></span></label>
+        </div>
+      </div>
+
+      <h3 class="matrix-title">Render Target Configuration</h3>
+      <div class="dropdown-container" id="renderTargetDropdownContainer-batch">
+        <button type="button" class="dropdown-field render-dropdown-field" aria-expanded="false" aria-haspopup="true" aria-controls="renderTargetDropdownMenu-batch" onclick="toggleDropdownMenu(event)">
+          <span id="label-render-target-batch">— Select Render —</span>
+        </button>
+        <div class="dropdown-content" id="renderTargetDropdownMenu-batch" role="group" aria-label="Render Target Options">
+          <label class="dropdown-item render-item">Unreal Engine 5, 8K<input type="checkbox" name="renderTargets" value="Unreal Engine 5, 8K" onchange="updateSelectedMediums('renderTargetDropdownContainer-batch', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Octane Render 4K<input type="checkbox" name="renderTargets" value="Octane Render 4K" onchange="updateSelectedMediums('renderTargetDropdownContainer-batch', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">v-Ray Photorealistic<input type="checkbox" name="renderTargets" value="v-Ray Photorealistic" onchange="updateSelectedMediums('renderTargetDropdownContainer-batch', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Cinema 4D + Redshift<input type="checkbox" name="renderTargets" value="Cinema 4D + Redshift" onchange="updateSelectedMediums('renderTargetDropdownContainer-batch', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Blender Cycles<input type="checkbox" name="renderTargets" value="Blender Cycles" onchange="updateSelectedMediums('renderTargetDropdownContainer-batch', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Midjourney v6 quality<input type="checkbox" name="renderTargets" value="Midjourney v6 quality" onchange="updateSelectedMediums('renderTargetDropdownContainer-batch', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">SDXL Ultra, 4K<input type="checkbox" name="renderTargets" value="SDXL Ultra, 4K" onchange="updateSelectedMediums('renderTargetDropdownContainer-batch', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Stable Diffusion<input type="checkbox" name="renderTargets" value="Stable Diffusion" onchange="updateSelectedMediums('renderTargetDropdownContainer-batch', '— Select Render —')"><span class="checkmark"></span></label>
+        </div>
+      </div>
+
+<h3 class="matrix-title">Style Presets <span class="matrix-counter" id="count-presets-batch">0 selected</span></h3>
+      <div class="matrix-grid">
+        <button type="button" class="chip" data-color="dark" aria-pressed="false" onclick="toggleChipSelection(this, 'presets-batch')">
+          <span class="chip-title">🌘 Dark</span>
+          <span class="chip-subtitle">Shadow · Void</span>
+        </button>
+        <button type="button" class="chip" data-color="blue" aria-pressed="false" onclick="toggleChipSelection(this, 'presets-batch')">
+          <span class="chip-title">✨ Celestial</span>
+          <span class="chip-subtitle">Aether · Radiant</span>
+        </button>
+        <button type="button" class="chip" data-color="red" aria-pressed="false" onclick="toggleChipSelection(this, 'presets-batch')">
+          <span class="chip-title">🪵 Tribal</span>
+          <span class="chip-subtitle">Earth · Ancestry</span>
+        </button>
+        <button type="button" class="chip" data-color="purple" aria-pressed="false" onclick="toggleChipSelection(this, 'presets-batch')">
+          <span class="chip-title">👻 Ethereal</span>
+          <span class="chip-subtitle">Spirit · Light</span>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="matrix-title">Tattoo Styles <span class="matrix-counter" id="count-styles-batch">0 selected</span></h3>
+      <div class="matrix-grid">
+        <button type="button" class="chip" data-color="magenta" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-batch')">
+          <span class="chip-title">⛩️ Japanese Traditional</span>
+          <span class="chip-subtitle">Irezumi Outlines</span>
+        </button>
+        <button type="button" class="chip" data-color="orange" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-batch')">
+          <span class="chip-title">🦅 American Traditional</span>
+          <span class="chip-subtitle">Bold Lines · Solid Fill</span>
+        </button>
+        <button type="button" class="chip" data-color="blue" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-batch')">
+          <span class="chip-title">🤖 Biomechanical</span>
+          <span class="chip-subtitle">Anatomy · Cyber-Form Matrix</span>
+        </button>
+        <button type="button" class="chip" data-color="purple" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-batch')">
+          <span class="chip-title">✍️ Script / Typography</span>
+          <span class="chip-subtitle">Calligraphy Lineage Call</span>
+        </button>        <button type="button" class="chip" data-color="green" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-batch')">
+          <span class="chip-title">🌸 Floral Structural</span>
+          <span class="chip-subtitle">Botanical Geometry</span>
+        </button>
+        <button type="button" class="chip" data-color="dark" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-batch')">
+          <span class="chip-title">🌓 Black and Grey</span>
+          <span class="chip-subtitle">Smooth Shading Shards</span>
+        </button>
+        <button type="button" class="chip" data-color="teal" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-batch')">
+          <span class="chip-title">🎨 Full Color</span>
+          <span class="chip-subtitle">Vibrant Saturation Matrix</span>
+        </button>
+        <button type="button" class="chip" data-color="yellow" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-batch')">
+          <span class="chip-title">📐 Geometric</span>
+          <span class="chip-subtitle">Sacred Math · Symmetry Lines</span>
+        </button>
+        <button type="button" class="chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-batch')">
+          <span class="chip-title">✏️ Pure Stencil Outline Formatting</span>
+          <span class="chip-subtitle">High Contrast Transfer Outline</span>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="matrix-title">Body Placement Matrix <span class="matrix-counter" id="count-placement">0 selected</span></h3>
+      <div class="matrix-grid placement-grid">
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">💪 Forearm</span>
+          <span class="chip-subtitle">Medium Format</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">⚡ Sleeve</span>
+          <span class="chip-subtitle">Full Arm Array</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🪐 Back Suit</span>
+          <span class="chip-subtitle">Full Master Suite</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🏺 Neck Line</span>
+          <span class="chip-subtitle">High Exposure</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🦵 Leg Sleeve</span>
+          <span class="chip-subtitle">Lower Limbs Array</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🦶 Ankle</span>
+          <span class="chip-subtitle">Detailed Micro Canvas</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">⌚ Wrist</span>
+          <span class="chip-subtitle">High Visibility Focal</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🛡️ Chest</span>
+          <span class="chip-subtitle">Broad Front Panel</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🧣 Neck</span>
+          <span class="chip-subtitle">Symmetrical Collar Profiles</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🌓 Half Sleeve</span>
+          <span class="chip-subtitle">Upper Arm Balance</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">✋ Hand</span>
+          <span class="chip-subtitle">Extremity Focal Matrix</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🍑 Butt</span>
+          <span class="chip-subtitle">Gluteal Contour Wrapper</span>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      
+</section>  <!-- MOOD PANEL -->
+  <section id="panel-mood" class="engine-panel" role="tabpanel" aria-labelledby="tab-mood" hidden>
+    <div class="system-card accent-purple">
+      <h2 class="card-header-text">Tattoo Mood Board Suite</h2>
+      <p class="card-subheader-text">Transforms your core narrative concept into 6 different perspective structural angles.</p>
+    </div>
+    <div>
+      <h3 class="matrix-title">Influence Pipeline Overrides <span class="matrix-counter" id="count-mood-styles">0 selected</span></h3>
+      <div class="matrix-grid">
+        <button type="button" class="chip" data-color="orange" aria-pressed="false" onclick="toggleChipSelection(this, 'mood-styles')"><span class="chip-title">🦅 American Traditional</span><span class="chip-subtitle">Bold Contrast Accents</span></button>
+        <button type="button" class="chip" data-color="magenta" aria-pressed="false" onclick="toggleChipSelection(this, 'mood-styles')"><span class="chip-title">⛩️ Japanese Traditional</span><span class="chip-subtitle">Symmetrical East Flows</span></button>
+        <button type="button" class="chip" data-color="dark" aria-pressed="false" onclick="toggleChipSelection(this, 'mood-styles')"><span class="chip-title">🌓 Black & Grey</span><span class="chip-subtitle">Smooth Core Gradients</span></button>
+        <button type="button" class="chip" data-color="blue" aria-pressed="false" onclick="toggleChipSelection(this, 'mood-styles')"><span class="chip-title">🤖 Biomechanical</span><span class="chip-subtitle">Anatomy · Cyber-Form Matrix</span></button>
+        <button type="button" class="chip" data-color="purple" aria-pressed="false" onclick="toggleChipSelection(this, 'mood-styles')"><span class="chip-title">✍️ Script / Typography</span><span class="chip-subtitle">Calligraphy Lineage Layout</span></button>
+        <button type="button" class="chip" data-color="green" aria-pressed="false" onclick="toggleChipSelection(this, 'mood-styles')"><span class="chip-title">🌸 Floral Structural</span><span class="chip-subtitle">Botanical Symmetry Elements</span></button>
+        <button type="button" class="chip" data-color="teal" aria-pressed="false" onclick="toggleChipSelection(this, 'mood-styles')"><span class="chip-title">🎨 Full Color</span><span class="chip-subtitle">Vibrant Saturation Array</span></button>
+        <button type="button" class="chip" data-color="yellow" aria-pressed="false" onclick="toggleChipSelection(this, 'mood-styles')"><span class="chip-title">📐 Geometric</span><span class="chip-subtitle">Sacred Math Framework</span></button>
+        <button type="button" class="chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'mood-styles')"><span class="chip-title">✏️ Pure Stencil Outline Formatting</span><span class="chip-subtitle">High Contrast Output Path</span></button>
+      </div>
+    </div>
+    <div>
+      <h3 class="matrix-title">Art Medium Parameters</h3>
+      <div class="dropdown-container" id="moodArtMediumDropdownContainer">
+        <button type="button" class="dropdown-field render-dropdown-field" aria-expanded="false" aria-haspopup="true" aria-controls="moodArtMediumDropdownMenu" onclick="toggleDropdownMenu(event)">
+          <span id="label-mood-art-medium">-Select Medium-</span>
+        </button>
+        <div class="dropdown-content" id="moodArtMediumDropdownMenu" role="group" aria-label="Mood Art Medium Options">
+          <label class="dropdown-item render-item">Digital Oil Painting<input type="checkbox" name="moodArtMediums" value="Digital Oil Painting" onchange="updateSelectedMediums('moodArtMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Photorealistic 3D Render<input type="checkbox" name="moodArtMediums" value="Photorealistic 3D Render" onchange="updateSelectedMediums('moodArtMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Watercolor<input type="checkbox" name="moodArtMediums" value="Watercolor" onchange="updateSelectedMediums('moodArtMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Pen & Ink Illustration<input type="checkbox" name="moodArtMediums" value="Pen & Ink Illustration" onchange="updateSelectedMediums('moodArtMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Mixed Media<input type="checkbox" name="moodArtMediums" value="Mixed Media" onchange="updateSelectedMediums('moodArtMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Charcoal Digital<input type="checkbox" name="moodArtMediums" value="Charcoal Digital" onchange="updateSelectedMediums('moodArtMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Gouache<input type="checkbox" name="moodArtMediums" value="Gouache" onchange="updateSelectedMediums('moodArtMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Airbrush<input type="checkbox" name="moodArtMediums" value="Airbrush" onchange="updateSelectedMediums('moodArtMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Concept Art<input type="checkbox" name="moodArtMediums" value="Concept Art" onchange="updateSelectedMediums('moodArtMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Neo-surealism<input type="checkbox" name="moodArtMediums" value="Neo-surealism" onchange="updateSelectedMediums('moodArtMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Baroque<input type="checkbox" name="moodArtMediums" value="Baroque" onchange="updateSelectedMediums('moodArtMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+        </div>
+      </div>
+      <h3 class="matrix-title">Render Target Configuration</h3>
+      <div class="dropdown-container" id="moodRenderTargetDropdownContainer">
+        <button type="button" class="dropdown-field render-dropdown-field" aria-expanded="false" aria-haspopup="true" aria-controls="moodRenderTargetDropdownMenu" onclick="toggleDropdownMenu(event)">
+          <span id="label-mood-render-target">— Select Render —</span>
+        </button>
+        <div class="dropdown-content" id="moodRenderTargetDropdownMenu" role="group" aria-label="Mood Render Target Options">
+          <label class="dropdown-item render-item">Unreal Engine 5, 8K<input type="checkbox" name="moodRenderTargets" value="Unreal Engine 5, 8K" onchange="updateSelectedMediums('moodRenderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Octane Render 4K<input type="checkbox" name="moodRenderTargets" value="Octane Render 4K" onchange="updateSelectedMediums('moodRenderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">v-Ray Photorealistic<input type="checkbox" name="moodRenderTargets" value="v-Ray Photorealistic" onchange="updateSelectedMediums('moodRenderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Cinema 4D + Redshift<input type="checkbox" name="moodRenderTargets" value="Cinema 4D + Redshift" onchange="updateSelectedMediums('moodRenderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Blender Cycles<input type="checkbox" name="moodRenderTargets" value="Blender Cycles" onchange="updateSelectedMediums('moodRenderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Midjourney v6 quality<input type="checkbox" name="moodRenderTargets" value="Midjourney v6 quality" onchange="updateSelectedMediums('moodRenderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">SDXL Ultra, 4K<input type="checkbox" name="moodRenderTargets" value="SDXL Ultra, 4K" onchange="updateSelectedMediums('moodRenderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Stable Diffusion<input type="checkbox" name="moodRenderTargets" value="Stable Diffusion" onchange="updateSelectedMediums('moodRenderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+        </div>
+      </div>
+    </div>
+    <div class="input-group">
+      <label for="input-mood-concept" class="matrix-title">Narrative Core Concept</label>
+      <textarea class="text-area-input" id="input-mood-concept" placeholder="E.g., Swans in a sunset, shifting horizons..." oninput="evaluateInputState('mood')" aria-describedby="summary-mood"></textarea>
+    </div>
+    <div class="summary-banner mood-variant" id="summary-mood">Select parameters and options to build out the multi-angle vector prompt matrix board.</div>
+    <button type="button" class="invoke-btn btn-purple" id="btn-invoke-mood" disabled onclick="executePromptGeneration('mood')">Build Tattoo Mood Board</button>
+    <div class="output-wrapper" id="output-box-mood">
+      <h3 class="output-header">Compiled Mood Layout</h3>
+      <div class="flash-sheet-container" id="container-mood-cards"></div>
+    </div>
+  
+<h3 class="matrix-title">Style Presets <span class="matrix-counter" id="count-presets-mood">0 selected</span></h3>
+      <div class="matrix-grid">
+        <button type="button" class="chip" data-color="dark" aria-pressed="false" onclick="toggleChipSelection(this, 'presets-mood')">
+          <span class="chip-title">🌘 Dark</span>
+          <span class="chip-subtitle">Shadow · Void</span>
+        </button>
+        <button type="button" class="chip" data-color="blue" aria-pressed="false" onclick="toggleChipSelection(this, 'presets-mood')">
+          <span class="chip-title">✨ Celestial</span>
+          <span class="chip-subtitle">Aether · Radiant</span>
+        </button>
+        <button type="button" class="chip" data-color="red" aria-pressed="false" onclick="toggleChipSelection(this, 'presets-mood')">
+          <span class="chip-title">🪵 Tribal</span>
+          <span class="chip-subtitle">Earth · Ancestry</span>
+        </button>
+        <button type="button" class="chip" data-color="purple" aria-pressed="false" onclick="toggleChipSelection(this, 'presets-mood')">
+          <span class="chip-title">👻 Ethereal</span>
+          <span class="chip-subtitle">Spirit · Light</span>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="matrix-title">Tattoo Styles <span class="matrix-counter" id="count-styles-mood">0 selected</span></h3>
+      <div class="matrix-grid">
+        <button type="button" class="chip" data-color="magenta" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-mood')">
+          <span class="chip-title">⛩️ Japanese Traditional</span>
+          <span class="chip-subtitle">Irezumi Outlines</span>
+        </button>
+        <button type="button" class="chip" data-color="orange" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-mood')">
+          <span class="chip-title">🦅 American Traditional</span>
+          <span class="chip-subtitle">Bold Lines · Solid Fill</span>
+        </button>
+        <button type="button" class="chip" data-color="blue" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-mood')">
+          <span class="chip-title">🤖 Biomechanical</span>
+          <span class="chip-subtitle">Anatomy · Cyber-Form Matrix</span>
+        </button>
+        <button type="button" class="chip" data-color="purple" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-mood')">
+          <span class="chip-title">✍️ Script / Typography</span>
+          <span class="chip-subtitle">Calligraphy Lineage Call</span>
+        </button>        <button type="button" class="chip" data-color="green" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-mood')">
+          <span class="chip-title">🌸 Floral Structural</span>
+          <span class="chip-subtitle">Botanical Geometry</span>
+        </button>
+        <button type="button" class="chip" data-color="dark" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-mood')">
+          <span class="chip-title">🌓 Black and Grey</span>
+          <span class="chip-subtitle">Smooth Shading Shards</span>
+        </button>
+        <button type="button" class="chip" data-color="teal" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-mood')">
+          <span class="chip-title">🎨 Full Color</span>
+          <span class="chip-subtitle">Vibrant Saturation Matrix</span>
+        </button>
+        <button type="button" class="chip" data-color="yellow" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-mood')">
+          <span class="chip-title">📐 Geometric</span>
+          <span class="chip-subtitle">Sacred Math · Symmetry Lines</span>
+        </button>
+        <button type="button" class="chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-mood')">
+          <span class="chip-title">✏️ Pure Stencil Outline Formatting</span>
+          <span class="chip-subtitle">High Contrast Transfer Outline</span>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="matrix-title">Body Placement Matrix <span class="matrix-counter" id="count-placement">0 selected</span></h3>
+      <div class="matrix-grid placement-grid">
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">💪 Forearm</span>
+          <span class="chip-subtitle">Medium Format</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">⚡ Sleeve</span>
+          <span class="chip-subtitle">Full Arm Array</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🪐 Back Suit</span>
+          <span class="chip-subtitle">Full Master Suite</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🏺 Neck Line</span>
+          <span class="chip-subtitle">High Exposure</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🦵 Leg Sleeve</span>
+          <span class="chip-subtitle">Lower Limbs Array</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🦶 Ankle</span>
+          <span class="chip-subtitle">Detailed Micro Canvas</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">⌚ Wrist</span>
+          <span class="chip-subtitle">High Visibility Focal</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🛡️ Chest</span>
+          <span class="chip-subtitle">Broad Front Panel</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🧣 Neck</span>
+          <span class="chip-subtitle">Symmetrical Collar Profiles</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🌓 Half Sleeve</span>
+          <span class="chip-subtitle">Upper Arm Balance</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">✋ Hand</span>
+          <span class="chip-subtitle">Extremity Focal Matrix</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🍑 Butt</span>
+          <span class="chip-subtitle">Gluteal Contour Wrapper</span>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      
+</section>
+
+  <!-- VOICE PANEL -->
+  <section id="panel-voice" class="engine-panel" role="tabpanel" aria-labelledby="tab-voice" hidden>
+    <div class="system-card accent-teal">
+      <h2 class="card-header-text">Your Artistic Voice Matrix</h2>
+      <p class="card-subheader-text">Appends specific stylistic rules and aesthetic limits directly to configurations for permanent prompt integration layers.</p>
+    </div>
+    <div class="input-group">
+      <label for="input-voice-settings" class="matrix-title">Permanent Voice Directives</label>
+      <textarea class="text-area-input" id="input-voice-settings" placeholder="E.g., Never include color gradients, always render line-weights using fine-line configurations..." oninput="evaluateInputState('voice')" aria-describedby="summary-voice"></textarea>
+    </div>
+    <div class="summary-banner" id="summary-voice" style="background-color: rgba(28,181,172,0.03); border-color: rgba(28,181,172,0.3);">Enter your artistic voice rules to lock them into all future prompt generations.</div>
+    <button type="button" class="invoke-btn btn-teal" id="btn-save-voice" disabled onclick="executePromptGeneration('voice')">Lock Voice Directives</button>
+  </section>
+
+  <!-- HISTORY PANEL -->
+  <section id="panel-history" class="engine-panel" role="tabpanel" aria-labelledby="tab-history" hidden>
+    <div class="system-card" style="border-left: 3px solid var(--accent-yellow);">
+      <h3 class="output-header" style="color: inherit; margin-bottom: 0;">
+        <span>System Session Archives</span>
+        <button type="button" style="color: var(--accent-pink); cursor: pointer; background: transparent; border: none; font-family: monospace; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;" onclick="clearSystemHistoryLog()">Clear Log</button>
+      </h3>
+    </div>
+    <div id="container-history-items"></div>
+  </section>
+
+  <!-- PROMPTGEN PANEL -->
+  <section id="panel-promptgen" class="engine-panel" role="tabpanel" aria-labelledby="tab-promptgen" hidden>
+    <div class="system-card accent-blue">
+      <h2 class="card-header-text">PromptGen Engine Workspace</h2>
+      <p class="card-subheader-text">High-influence parameter blending pipeline configured to forge 5 highly discrete alternative prompt variants keeping conceptual core subject alignment.</p>
+    </div>
+    <div>
+      <h3 class="matrix-title">Art Medium Parameters</h3>
+      <div class="dropdown-container" id="pgMediumDropdownContainer">
+        <button type="button" class="dropdown-field render-dropdown-field" aria-expanded="false" aria-haspopup="true" aria-controls="pgMediumDropdownMenu" onclick="toggleDropdownMenu(event)">
+          <span id="label-pg-medium">-Select Medium-</span>
+        </button>
+        <div class="dropdown-content" id="pgMediumDropdownMenu" role="group" aria-label="PromptGen Medium Options">
+          <label class="dropdown-item render-item">Digital Oil Painting<input type="checkbox" name="pgMediums" value="Digital Oil Painting" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Photorealistic 3D Render<input type="checkbox" name="pgMediums" value="Photorealistic 3D Render" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Watercolor<input type="checkbox" name="pgMediums" value="Watercolor" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Pen & Ink Illustration<input type="checkbox" name="pgMediums" value="Pen & Ink Illustration" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Mixed Media<input type="checkbox" name="pgMediums" value="Mixed Media" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Charcoal Digital<input type="checkbox" name="pgMediums" value="Charcoal Digital" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Gouache<input type="checkbox" name="pgMediums" value="Gouache" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Airbrush<input type="checkbox" name="pgMediums" value="Airbrush" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Concept<input type="checkbox" name="pgMediums" value="Concept" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Realism<input type="checkbox" name="pgMediums" value="Realism" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Surrealism<input type="checkbox" name="pgMediums" value="Surrealism" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Neo-Surealism<input type="checkbox" name="pgMediums" value="Neo-Surealism" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Fantasy<input type="checkbox" name="pgMediums" value="Fantasy" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Digital<input type="checkbox" name="pgMediums" value="Digital" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Portraiture<input type="checkbox" name="pgMediums" value="Portraiture" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Caricature<input type="checkbox" name="pgMediums" value="Caricature" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Sketch<input type="checkbox" name="pgMediums" value="Sketch" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Abstract<input type="checkbox" name="pgMediums" value="Abstract" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Illustration<input type="checkbox" name="pgMediums" value="Illustration" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Mosaic<input type="checkbox" name="pgMediums" value="Mosaic" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Capriccio<input type="checkbox" name="pgMediums" value="Capriccio" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Graffiti<input type="checkbox" name="pgMediums" value="Graffiti" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Photo<input type="checkbox" name="pgMediums" value="Photo" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Quadratura<input type="checkbox" name="pgMediums" value="Quadratura" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Tapestry<input type="checkbox" name="pgMediums" value="Tapestry" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Animal Painting<input type="checkbox" name="pgMediums" value="Animal Painting" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Landscape<input type="checkbox" name="pgMediums" value="Landscape" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Tessellation<input type="checkbox" name="pgMediums" value="Tessellation" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Sculpture<input type="checkbox" name="pgMediums" value="Sculpture" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Cityscape<input type="checkbox" name="pgMediums" value="Cityscape" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Genre Painting<input type="checkbox" name="pgMediums" value="Genre Painting" onchange="updateSelectedMediums('pgMediumDropdownContainer', '-Select Medium-')"><span class="checkmark"></span></label>
+        </div>
+      </div>
+      <h3 class="matrix-title">Render Target Configuration</h3>
+      <div class="dropdown-container" id="pgRenderTargetDropdownContainer">
+        <button type="button" class="dropdown-field render-dropdown-field" aria-expanded="false" aria-haspopup="true" aria-controls="pgRenderTargetDropdownMenu" onclick="toggleDropdownMenu(event)">
+          <span id="label-pg-render-target">— Select Render —</span>
+        </button>
+        <div class="dropdown-content" id="pgRenderTargetDropdownMenu" role="group" aria-label="PromptGen Render Target Options">
+          <label class="dropdown-item render-item">Unreal Engine 5, 8K<input type="checkbox" name="pgRenderTargets" value="Unreal Engine 5, 8K" onchange="updateSelectedMediums('pgRenderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Octane Render 4K<input type="checkbox" name="pgRenderTargets" value="Octane Render 4K" onchange="updateSelectedMediums('pgRenderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">V-Ray Photorealistic<input type="checkbox" name="pgRenderTargets" value="V-Ray Photorealistic" onchange="updateSelectedMediums('pgRenderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Cinema 4D + Redshift<input type="checkbox" name="pgRenderTargets" value="Cinema 4D + Redshift" onchange="updateSelectedMediums('pgRenderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Blender Cycles<input type="checkbox" name="pgRenderTargets" value="Blender Cycles" onchange="updateSelectedMediums('pgRenderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Midjourney v6 quality<input type="checkbox" name="pgRenderTargets" value="Midjourney v6 quality" onchange="updateSelectedMediums('pgRenderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">SDXL Ultra, 4K<input type="checkbox" name="pgRenderTargets" value="SDXL Ultra, 4K" onchange="updateSelectedMediums('pgRenderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+          <label class="dropdown-item render-item">Stable Diffusion<input type="checkbox" name="pgRenderTargets" value="Stable Diffusion" onchange="updateSelectedMediums('pgRenderTargetDropdownContainer', '— Select Render —')"><span class="checkmark"></span></label>
+        </div>
+      </div>
+    </div>
+    <div class="input-group">
+      <label for="input-promptgen-concept" class="matrix-title">Narrative Core Concept</label>
+      <div class="textarea-uploader-wrapper">
+        <textarea id="input-promptgen-concept" placeholder="Describe your creative concept blueprint for multi-preset pipeline scaling..." oninput="evaluateInputState('promptgen')" aria-describedby="summary-promptgen"></textarea>
+        <div class="embedded-uploader-bar">
+          <div class="uploader-hint-text">Reference Images (max 2) — 85% visual influence</div>
+          <div class="preview-thumbnail-deck" id="pgThumbDeck"></div>
+          <label class="uploader-trigger-label" for="pgGalleryInput">⊕ Select Images From Gallery</label>
+          <input type="file" id="pgGalleryInput" style="display:none;" accept="image/*" multiple onchange="processPromptGenImages(this)">
+        </div>
+      </div>
+    </div>
+    <div class="summary-banner promptgen-variant" id="summary-promptgen">Enter a core pipeline asset roadmap to formulate the 5 distinct prompt configurations.</div>
+    <button type="button" class="invoke-btn btn-blue" id="btn-invoke-promptgen" disabled onclick="executePromptGeneration('promptgen')">Build PromptGen</button>
+    <div class="output-wrapper" id="output-box-promptgen">
+      <h3 class="output-header">Pipeline Matrix Output <span>Engine: Core Vector V2</span></h3>
+      <div class="flash-sheet-container" id="container-promptgen-cards"></div>
+    </div>
+  
+<h3 class="matrix-title">Style Presets <span class="matrix-counter" id="count-presets-promptgen">0 selected</span></h3>
+      <div class="matrix-grid">
+        <button type="button" class="chip" data-color="dark" aria-pressed="false" onclick="toggleChipSelection(this, 'presets-promptgen')">
+          <span class="chip-title">🌘 Dark</span>
+          <span class="chip-subtitle">Shadow · Void</span>
+        </button>
+        <button type="button" class="chip" data-color="blue" aria-pressed="false" onclick="toggleChipSelection(this, 'presets-promptgen')">
+          <span class="chip-title">✨ Celestial</span>
+          <span class="chip-subtitle">Aether · Radiant</span>
+        </button>
+        <button type="button" class="chip" data-color="red" aria-pressed="false" onclick="toggleChipSelection(this, 'presets-promptgen')">
+          <span class="chip-title">🪵 Tribal</span>
+          <span class="chip-subtitle">Earth · Ancestry</span>
+        </button>
+        <button type="button" class="chip" data-color="purple" aria-pressed="false" onclick="toggleChipSelection(this, 'presets-promptgen')">
+          <span class="chip-title">👻 Ethereal</span>
+          <span class="chip-subtitle">Spirit · Light</span>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="matrix-title">Tattoo Styles <span class="matrix-counter" id="count-styles-promptgen">0 selected</span></h3>
+      <div class="matrix-grid">
+        <button type="button" class="chip" data-color="magenta" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-promptgen')">
+          <span class="chip-title">⛩️ Japanese Traditional</span>
+          <span class="chip-subtitle">Irezumi Outlines</span>
+        </button>
+        <button type="button" class="chip" data-color="orange" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-promptgen')">
+          <span class="chip-title">🦅 American Traditional</span>
+          <span class="chip-subtitle">Bold Lines · Solid Fill</span>
+        </button>
+        <button type="button" class="chip" data-color="blue" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-promptgen')">
+          <span class="chip-title">🤖 Biomechanical</span>
+          <span class="chip-subtitle">Anatomy · Cyber-Form Matrix</span>
+        </button>
+        <button type="button" class="chip" data-color="purple" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-promptgen')">
+          <span class="chip-title">✍️ Script / Typography</span>
+          <span class="chip-subtitle">Calligraphy Lineage Call</span>
+        </button>        <button type="button" class="chip" data-color="green" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-promptgen')">
+          <span class="chip-title">🌸 Floral Structural</span>
+          <span class="chip-subtitle">Botanical Geometry</span>
+        </button>
+        <button type="button" class="chip" data-color="dark" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-promptgen')">
+          <span class="chip-title">🌓 Black and Grey</span>
+          <span class="chip-subtitle">Smooth Shading Shards</span>
+        </button>
+        <button type="button" class="chip" data-color="teal" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-promptgen')">
+          <span class="chip-title">🎨 Full Color</span>
+          <span class="chip-subtitle">Vibrant Saturation Matrix</span>
+        </button>
+        <button type="button" class="chip" data-color="yellow" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-promptgen')">
+          <span class="chip-title">📐 Geometric</span>
+          <span class="chip-subtitle">Sacred Math · Symmetry Lines</span>
+        </button>
+        <button type="button" class="chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'styles-promptgen')">
+          <span class="chip-title">✏️ Pure Stencil Outline Formatting</span>
+          <span class="chip-subtitle">High Contrast Transfer Outline</span>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="matrix-title">Body Placement Matrix <span class="matrix-counter" id="count-placement">0 selected</span></h3>
+      <div class="matrix-grid placement-grid">
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">💪 Forearm</span>
+          <span class="chip-subtitle">Medium Format</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">⚡ Sleeve</span>
+          <span class="chip-subtitle">Full Arm Array</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🪐 Back Suit</span>
+          <span class="chip-subtitle">Full Master Suite</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🏺 Neck Line</span>
+          <span class="chip-subtitle">High Exposure</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🦵 Leg Sleeve</span>
+          <span class="chip-subtitle">Lower Limbs Array</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🦶 Ankle</span>
+          <span class="chip-subtitle">Detailed Micro Canvas</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">⌚ Wrist</span>
+          <span class="chip-subtitle">High Visibility Focal</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🛡️ Chest</span>
+          <span class="chip-subtitle">Broad Front Panel</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🧣 Neck</span>
+          <span class="chip-subtitle">Symmetrical Collar Profiles</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🌓 Half Sleeve</span>
+          <span class="chip-subtitle">Upper Arm Balance</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">✋ Hand</span>
+          <span class="chip-subtitle">Extremity Focal Matrix</span>
+        </button>
+        <button type="button" class="chip placement-chip" data-color="pink" aria-pressed="false" onclick="toggleChipSelection(this, 'placement')">
+          <span class="chip-title">🍑 Butt</span>
+          <span class="chip-subtitle">Gluteal Contour Wrapper</span>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      
+</section>
+      <!-- 4-CAMERA PANEL -->
+      <section id="panel-camera" class="engine-panel" role="tabpanel" aria-labelledby="tab-camera" hidden>
+        <div class="app">
+  <header>
+    <div class="title-wrap">
+      <span class="header-dot"></span>
+      <h1>GUARDIAN CINEMATIC FIX</h1>
+    </div>
+    <span class="badge">v2.2</span>
+  </header>
+  <div class="pill">dropdown inserts single words • guardian lights only • 4 camera control</div>
+
+  <main class="card">
+    <section class="section">
+      <label class="label">KEYWORD PICKER</label>
+      <div class="select-wrap">
+        <select id="keywordPicker">
+          <option value="" selected>— Insert Guardian Word —</option>
+          <optgroup label="LUNARA — moon/night">
+            <option>moonlight</option>
+            <option>starlight</option>
+            <option>dusk</option>
+            <option>twilight</option>
+            <option>midnight</option>
+            <option>lunar</option>
+            <option>ethereal</option>
+            <option>silver</option>
+            <option>glow</option>
+            <option>nocturne</option>
+            <option>nebula</option>
+            <option>cosmic</option>
+          </optgroup>
+          <optgroup label="AETHON — fire/energy">
+            <option>ember</option>
+            <option>flame</option>
+            <option>blaze</option>
+            <option>inferno</option>
+            <option>plasma</option>
+            <option>spark</option>
+            <option>ignite</option>
+            <option>molten</option>
+            <option>radiant</option>
+            <option>solar flare</option>
+            <option>phoenix</option>
+            <option>dragonfire</option>
+            <option>volcanic</option>
+            <option>scorch</option>
+            <option>incandescent</option>
+            <option>forge</option>
+            <option>wildfire</option>
+            <option>brimstone</option>
+            <option>hellfire</option>
+            <option>supernova</option>
+            <option>combustion</option>
+            <option>pyroclastic</option>
+            <option>thermonuclear</option>
+          </optgroup>
+          <optgroup label="SOLARIS — sun/day">
+            <option>sunlight</option>
+            <option>dawn</option>
+            <option>sunrise</option>
+            <option>golden hour</option>
+            <option>daylight</option>
+            <option>solar</option>
+            <option>bright</option>
+            <option>warm</option>
+            <option>amber</option>
+            <option>honey</option>
+            <option>radiant sun</option>
+            <option>midday</option>
+            <option>afternoon</option>
+            <option>sunbeam</option>
+            <option>clear sky</option>
+            <option>vibrant</option>
+            <option>vivid</option>
+            <option>summer</option>
+            <option>solstice</option>
+            <option>heliacal</option>
+            <option>aureate</option>
+            <option>citrine</option>
+            <option>marigold</option>
+            <option>tangerine</option>
+            <option>saffron</option>
+            <option>topaz</option>
+            <option>daybreak</option>
+            <option>morning light</option>
+            <option>noon</option>
+            <option>sundrenched</option>
+            <option>luminous</option>
+            <option>incandescent day</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="guardians">
+        <div class="g-item"><span class="g-dot lunara" id="dot-lunara"></span>LUNARA</div>
+        <div class="g-item"><span class="g-dot aethon" id="dot-aethon"></span>AETHON</div>
+        <div class="g-item"><span class="g-dot solaris" id="dot-solaris"></span>SOLARIS</div>
+      </div>
+      <div class="check-row">
+        <input type="checkbox" id="guardianToggle" checked>
+        <label for="guardianToggle">Guardian Keywords</label>
+      </div>
+    </section>
+
+    <section class="section">
+      <label class="label" for="subject">SUBJECT</label>
+      <textarea id="subject" placeholder="A colorful moth wing on a sunny day"></textarea>
+    </section>
+
+    <div class="check-row" style="margin-top:-6px">
+      <input type="checkbox" id="signature" checked>
+      <label for="signature">Add signature</label>
+    </div>
+    <div class="check-row">
+      <input type="checkbox" id="skinFix">
+      <label for="skinFix">Skin Fix: SSS ON</label>
+    </div>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <label class="label">LENS & DEPTH</label>
+      <div class="select-wrap">
+        <select id="lens">
+          <option value="portrait">1. Portrait Photography</option>
+          <option value="macro" selected>2. Macro Photography</option>
+          <option value="micro">3. Micro Photography</option>
+          <option value="landscape">4. Landscape & Cityscape</option>
+        </select>
+      </div>
+    </section>
+
+    <button class="btn-generate" id="generate">GENERATE</button>
+
+    <section class="section" style="margin-bottom:6px">
+      <label class="label" for="output">OUTPUT</label>
+      <textarea id="output" readonly></textarea>
+      <button class="btn-copy" id="copy">COPY</button>
+    </section>
+  </main>
+</div>
+      </section>
+
+
+  <!-- ADD: Advanced Pipeline Modifiers (insert near bottom of main app area) -->
+  <section id="advanced-modifiers" class="system-card" style="margin-top:14px;">
+    <h3 class="card-header-text">Advanced Pipeline Modifiers</h3>
+    <p class="card-subheader-text">Tweak generation flags — these append to all prompt outputs.</p>
+
+    <div style="display:flex; flex-direction:column; gap:12px; margin-top:10px;">
+      <div style="display:flex; gap:8px;">
+        <button type="button" id="btn-toggle-modifiers" class="invoke-btn" style="background:#6b5b95; padding:10px 14px; flex:1;">Invoke Modifiers</button>
+        <div style="display:flex; align-items:center; gap:8px; font-size:0.75rem; color:var(--text-muted);">
+          Mode: <span id="modifier-mode" style="font-weight:800; color:var(--accent-green); margin-left:8px;">ACTIVE</span>
+        </div>
+      </div>
+
+      <div id="modifiers-grid" style="display:grid; grid-template-columns: 1fr 64px; gap:8px; align-items:center;">
+        <label style="font-size:0.75rem; font-weight:700;">--style <span id="val-style" style="font-family:monospace; font-weight:800;">300</span></label>
+        <input type="range" id="range-style" min="0" max="1000" value="300">
+        <label style="font-size:0.75rem; font-weight:700;">--chaos <span id="val-chaos" style="font-family:monospace; font-weight:800;">0</span></label>
+        <input type="range" id="range-chaos" min="0" max="100" value="0">
+        <label style="font-size:0.75rem; font-weight:700;">--stop <span id="val-stop" style="font-family:monospace; font-weight:800;">100</span></label>
+        <input type="range" id="range-stop" min="0" max="100" value="100">
+        <label style="font-size:0.75rem; font-weight:700;">--weird <span id="val-weird" style="font-family:monospace; font-weight:800;">0</span></label>
+        <input type="range" id="range-weird" min="0" max="100" value="0">
+        <label style="font-size:0.75rem; font-weight:700;">--stylize <span id="val-stylize" style="font-family:monospace; font-weight:800;">0</span></label>
+        <input type="range" id="range-stylize" min="0" max="1000" value="0">
+      </div>
+
+      <div style="display:flex; gap:8px;">
+        <button id="btn-reset-modifiers" class="utility-btn" style="flex:1;">Reset to defaults</button>
+        <div style="font-size:0.75rem; color:var(--text-muted); align-self:center;">Saved automatically</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- CONSULTATION CARD -->
+<section id="consultationCardStructure" class="consultation-view" aria-label="Consultation Design Spec Sheet">
+  <div class="cc-header">
+    <h2 class="cc-title">Guardian Engine Studio</h2>
+    <p class="cc-subtitle">Consultation Design Spec Sheet</p>
+  </div>
+  <div class="cc-grid">
+    <div class="cc-section">
+      <div class="cc-section-label">Target Prompt Directives</div>
+      <p class="cc-text-block" id="cc-target-prompt-text">No prompt has been logged into current design session module.</p>
+    </div>
+    <div class="cc-section">
+      <div class="cc-section-label">Technical Matrix Spec Breakdown</div>
+      <div class="cc-field-row">
+        <div class="cc-field-label">Engine Config</div>
+        <div id="cc-meta-engine">Arcanea-Oracle Protocol v2.0</div>
+      </div>
+      <div class="cc-field-row">
+        <div class="cc-field-label">Selected Mix</div>
+        <div id="cc-meta-mix">N/A</div>
+      </div>
+      <div class="cc-field-row">
+        <div class="cc-field-label">Target Canvas</div>
+        <div id="cc-meta-canvas">Unspecified Core Area</div>
+      </div>
+    </div>
+    <div class="cc-section">
+      <div class="cc-section-label">Session Artist Logs</div>
+      <div class="cc-field-row"><div class="cc-field-label">Pricing Tier</div><div>________________________</div></div>
+      <div class="cc-field-row"><div class="cc-field-label">Deposit Token</div><div>************************</div></div>
+      <div class="cc-field-row"><div class="cc-field-label">Target Hours</div><div>************************ mins</div></div>
+    </div>
+  </div>
+  <div class="cc-qr-wrapper">
+    <div class="cc-qr-box">
+      <div class="cc-qr-text">GUARDIAN<br>PROMPTS<br>▼<<br>SECURE</div>
+    </div>
+    <div class="cc-qr-text" style="color: #666666; font-size: 0.5rem; text-transform: uppercase;">Scan card to access engine vectors on mobile devices</div>
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 8px;">
+    <button type="button" class="invoke-btn btn-pink" style="border-radius: 0;" onclick="window.print()">Print / Save as PDF</button>
+    <button type="button" class="utility-btn" style="border-radius: 0; background: none; color: #000000; border: 1px solid #000000;" onclick="exitConsultationCardView()">Return To Engine Workspace</button>
+  </div>
+</section>
+
+<!-- TOAST -->
+<div id="toastMessageContainer" class="toast-overlay" role="status" aria-live="polite" aria-atomic="true">Copied to clipboard.</div>
+
+<!-- ZOOM HUD -->
+<div class="zoom-hud" role="toolbar" aria-label="Zoom Controls">
+  <button type="button" class="zoom-btn-element" aria-label="Zoom Out" onclick="adjustScaleManual(-5)">−</button>
+  <div class="zoom-value-label" id="zoomDisplayIndicator">100%</div>
+  <button type="button" class="zoom-btn-element" aria-label="Zoom In" onclick="adjustScaleManual(5)">+</button>
+</div>
+
+<script>
+// ============================================
+// GUARDIAN ENGINE v2.0 — UNIFIED JAVASCRIPT
+// Base: Meta.html | Fixes: 26gift-4u.html | Enhancements: SuperEngine.html
+// ============================================// ============================================
+// GUARDIAN ENGINE v2.0 — UNIFIED JAVASCRIPT
+// Base: Meta.html | Fixes: 26gift-4u.html | Enhancements: SuperEngine.html
+// ============================================
+
+let currentScaleFactor = 1.0;
+const MIN_SCALE = 0.8;
+const MAX_SCALE = 1.5;
+
+let loggedPromptsHistory = JSON.parse(localStorage.getItem('ge-history') || '[]');
+if (!Array.isArray(loggedPromptsHistory)) loggedPromptsHistory = [];
+
+let activeGeneratedVariations = ["", "", ""];
+let globalVoiceDirective = localStorage.getItem('ge-voice') || "";
+let promptGenImagesList = [];
+
+const mainAppStructure = document.getElementById('mainAppStructure');
+const zoomDisplayIndicator = document.getElementById('zoomDisplayIndicator');
+
+function executeScaleTransformation() {
+  if (!mainAppStructure) return;
+  mainAppStructure.style.transform = `scale(${currentScaleFactor})`;
+  zoomDisplayIndicator.innerText = `${Math.round(currentScaleFactor * 100)}%`;
+  if (currentScaleFactor < 1.0) {
+    const compensationSpace = (1.0 - currentScaleFactor) * 120;
+    mainAppStructure.style.marginBottom = `-${compensationSpace}px`;
+  } else {
+    mainAppStructure.style.marginBottom = "0px";
+  }
+}
+
+function adjustScaleManual(percentageDelta) {
+  currentScaleFactor += (percentageDelta / 100);
+  currentScaleFactor = Math.max(MIN_SCALE, Math.min(MAX_SCALE, currentScaleFactor));
+  executeScaleTransformation();
+}
+
+let touchStateRegistry = { initialDistance: 0, initialScale: 1.0, isPinching: false };
+function calculateTouchHypotenuse(t1, t2) {
+  return Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+}
+window.addEventListener('touchstart', function(event) {
+  if (event.touches.length === 2) {
+    touchStateRegistry.isPinching = true;
+    touchStateRegistry.initialDistance = calculateTouchHypotenuse(event.touches[0], event.touches[1]);
+    touchStateRegistry.initialScale = currentScaleFactor;
+  }
+}, { passive: false });
+
+window.addEventListener('touchmove', function(event) {
+  if (touchStateRegistry.isPinching && event.touches.length === 2) {
+    event.preventDefault();
+    const currentDistance = calculateTouchHypotenuse(event.touches[0], event.touches[1]);
+    if (touchStateRegistry.initialDistance > 0) {
+      const varianceScaleFactor = currentDistance / touchStateRegistry.initialDistance;
+      let targetHypotheticalScale = touchStateRegistry.initialScale * varianceScaleFactor;
+      currentScaleFactor = Math.max(MIN_SCALE, Math.min(MAX_SCALE, targetHypotheticalScale));
+      executeScaleTransformation();
+    }
+  }
+}, { passive: false });
+
+window.addEventListener('touchend', function(event) {
+  if (event.touches.length < 2) {
+    touchStateRegistry.isPinching = false;
+    touchStateRegistry.initialDistance = 0;
+  }
+});
+
+function toggleDropdownMenu(event) {
+  event.stopPropagation();
+  const dropdown = event.currentTarget.parentNode;
+  const isOpen = dropdown.classList.toggle('open');
+  event.currentTarget.setAttribute('aria-expanded', String(isOpen));
+}
+
+document.addEventListener('click', function(event) {
+  const dropdowns = document.querySelectorAll('.dropdown-container');
+  dropdowns.forEach(dropdown => {
+    if (!dropdown.contains(event.target)) {
+      dropdown.classList.remove('open');
+      const btn = dropdown.querySelector('.dropdown-field');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+});
+
+const getMediumLabel = (containerId) => {
+  const el = document.querySelector(`#${containerId} .render-dropdown-field span`);
+  return el || { innerText: '' };
+};
+
+function updateSelectedMediums(containerId, defaultLabel) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const checkboxes = container.querySelectorAll('.dropdown-content input[type="checkbox"]');
+  const labelRef = getMediumLabel(containerId);
+  const selectedArr = [];
+  checkboxes.forEach((checkbox) => {
+    if (checkbox.checked) selectedArr.push(checkbox.value);
+  });
+  if (selectedArr.length === 0) {
+    labelRef.innerText = defaultLabel;
+  } else if (selectedArr.length === 1) {
+    labelRef.innerText = selectedArr[0];
+  } else {
+    labelRef.innerText = `${selectedArr.length} selected`;
+  }
+  updateDynamicSummaryBanners();
+}
+
+function switchEngineMode(panelTarget, elementRef) {
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.classList.remove('active');
+    btn.setAttribute('aria-selected', 'false');
+  });
+  document.querySelectorAll('.engine-panel').forEach(panel => {
+    panel.classList.remove('active-panel');
+    panel.hidden = true;
+  });
+  elementRef.classList.add('active');
+  elementRef.setAttribute('aria-selected', 'true');
+  const targetPanel = document.getElementById(`panel-${panelTarget}`);
+  if (targetPanel) {
+    targetPanel.classList.add('active-panel');
+    targetPanel.hidden = false;
+  }
+  if (panelTarget === 'history') renderSystemHistoryLog();
+}
+
+function toggleChipSelection(elementRef, typeGroup) {
+  const isSelected = elementRef.classList.toggle('selected');
+  elementRef.setAttribute('aria-pressed', String(isSelected));
+  const parentGrid = elementRef.parentNode;
+  const activeCount = parentGrid ? parentGrid.querySelectorAll('.chip.selected').length : 0;
+  const counterRef = document.getElementById(`count-${typeGroup}`);
+  if (counterRef) counterRef.innerText = `${activeCount} selected`;
+  updateDynamicSummaryBanners();
+  evaluateInputState('tattoo');
+  evaluateInputState('flash');
+  evaluateInputState('mood');
+}
+
+function processPromptGenImages(inputRef) {
+  const files = Array.from(inputRef.files);
+  inputRef.value = '';
+  const thumbDeck = document.getElementById('pgThumbDeck');
+  const remainingSlots = 2 - promptGenImagesList.length;
+
+  if (files.length === 0) {
+    updateDynamicSummaryBanners();
+    evaluateInputState('promptgen');
+    return;
+  }
+  if (remainingSlots <= 0) {
+    triggerToast("Max 2 images allowed");
+    return;
+  }
+
+  const filesToAdd = files.slice(0, remainingSlots);
+  if (files.length > remainingSlots) {
+    triggerToast(`Only added ${remainingSlots} image${remainingSlots > 1 ? 's' : ''} — max 2 total`);
+  }
+
+  let loadedCount = 0;
+  filesToAdd.forEach(function(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const dataURI = e.target.result;
+      promptGenImagesList.push({ name: file.name, dataURI: dataURI });
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'thumbnail-wrapper';
+
+      const frame = document.createElement('div');
+      frame.className = 'thumbnail-preview-frame';
+
+      const img = document.createElement('img');
+      img.src = dataURI;
+      img.alt = file.name;
+      frame.appendChild(img);
+
+      const label = document.createElement('div');
+      label.style.cssText = 'position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.52rem;font-weight:700;text-transform:uppercase;padding:3px 4px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0.3px;';
+      label.innerText = file.name.length > 12 ? file.name.substring(0, 11) + '\u2026' : file.name;
+      frame.appendChild(label);
+      wrapper.appendChild(frame);
+
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'thumbnail-remove-btn';
+      removeBtn.innerHTML = '&times;';
+      removeBtn.setAttribute('aria-label', `Remove image ${file.name}`);
+      removeBtn.addEventListener('click', function(ev) {
+        ev.stopPropagation();
+        promptGenImagesList = promptGenImagesList.filter(function(item) { return item.name !== file.name; });
+        wrapper.remove();
+        updateDynamicSummaryBanners();
+        evaluateInputState('promptgen');
+      });
+      wrapper.appendChild(removeBtn);
+
+      thumbDeck.appendChild(wrapper);
+
+      loadedCount++;
+      if (loadedCount === filesToAdd.length) {
+        updateDynamicSummaryBanners();
+        evaluateInputState('promptgen');
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function updateDynamicSummaryBanners() {
+  const selectedPresets = Array.from(document.querySelectorAll('#panel-tattoo .matrix-grid:nth-of-type(1) .chip.selected')).map(c => c.querySelector('.chip-title').innerText.replace(/[^\w\s/]/g, '').trim());
+  const selectedStyles = Array.from(document.querySelectorAll('#panel-tattoo .matrix-grid:nth-of-type(2) .chip.selected')).map(c => c.querySelector('.chip-title').innerText.replace(/[^\w\s/]/g, '').trim());
+  const selectedPlacements = Array.from(document.querySelectorAll('#panel-tattoo .placement-grid .chip.selected')).map(c => c.querySelector('.chip-title').innerText.replace(/[^\w\s/]/g, '').trim());
+  const currentConceptText = (document.getElementById('input-tattoo-concept') || { value: '' }).value.trim();
+  const summaryTattoo = document.getElementById('summary-tattoo');
+
+  const selectedFlashStyles = Array.from(document.querySelectorAll('#panel-flash .chip.selected')).map(c => c.querySelector('.chip-title').innerText.replace(/[^\w\s/]/g, '').trim());
+  const currentFlashText = (document.getElementById('input-flash-concept') || { value: '' }).value.trim();
+  const summaryFlash = document.getElementById('summary-flash');
+
+  const selectedMoodStyles = Array.from(document.querySelectorAll('#panel-mood .chip.selected')).map(c => c.querySelector('.chip-title').innerText.replace(/[^\w\s/]/g, '').trim());
+  const currentMoodText = (document.getElementById('input-mood-concept') || { value: '' }).value.trim();
+  const summaryMood = document.getElementById('summary-mood');
+
+  const currentPGText = (document.getElementById('input-promptgen-concept') || { value: '' }).value.trim();
+  const summaryPromptGen = document.getElementById('summary-promptgen');
+
+  if (summaryTattoo) {
+    if (selectedStyles.length > 0 || selectedPresets.length > 0 || currentConceptText.length > 0) {
+      summaryTattoo.innerText = `Mixing elements: ${selectedPresets.join(' × ') || 'Standard Core'} | ${selectedStyles.join(' × ') || 'Base Spec'} Vector mapping targeting [${selectedPlacements.join(', ') || 'General Canvas'}]. Concept: "${currentConceptText || 'Empty subject text'}"`;
+    } else {
+      summaryTattoo.innerText = "Select options and enter a concept to preview compilation layout...";
+    }
+  }
+
+  if (summaryFlash) {
+    if (selectedFlashStyles.length > 0 || currentFlashText.length > 0) {
+      summaryFlash.innerText = `Flash Pipeline Rules Matrix: ${selectedFlashStyles.join(' + ') || 'Default Traditional'}. Theme: "${currentFlashText || 'Unspecified theme'}"`;
+    } else {
+      summaryFlash.innerText = "Enter theme vector to formulate the 8-piece composition breakdown structure.";
+    }
+  }
+
+  if (summaryMood) {
+    if (selectedMoodStyles.length > 0 || currentMoodText.length > 0) {
+      summaryMood.innerText = `Mood Configurations Loaded: ${selectedMoodStyles.join(' + ') || 'Organic Flows'}. Concept Narrative: "${currentMoodText || 'Unspecified concept'}"`;
+    } else {
+      summaryMood.innerText = "Select parameters and options to build out the multi-angle vector prompt matrix board.";
+    }
+  }
+
+  if (summaryPromptGen) {
+    if (currentPGText.length > 0 || promptGenImagesList.length > 0) {
+      const filesLabel = promptGenImagesList.length > 0 ? ` (+${promptGenImagesList.length} Image Reference${promptGenImagesList.length > 1 ? 's' : ''} Active — 85% Visual Influence Weight)` : '';
+      summaryPromptGen.innerText = `PromptGen Pipeline Active — Text Influence: 95%${filesLabel}. Concept: "${currentPGText || 'No text entered yet'}"`;
+    } else {
+      summaryPromptGen.innerText = "Enter a core pipeline asset roadmap to formulate the 5 distinct prompt configurations.";
+    }
+  }
+}
+
+/* ---------------------------
+   Advanced Modifiers - JS
+   --------------------------- */
+const MODIFIER_KEYS = ['style','chaos','stop','weird','stylize'];
+const DEFAULT_MODIFIERS = { style:300, chaos:0, stop:100, weird:0, stylize:0 };
+const MOD_STORAGE_KEY = 'ge-modifiers';
+
+function loadModifiers() {
+  let stored = {};
+  try { stored = JSON.parse(localStorage.getItem(MOD_STORAGE_KEY) || '{}'); } catch(e){ stored = {}; }
+  const merged = Object.assign({}, DEFAULT_MODIFIERS, stored);
+  MODIFIER_KEYS.forEach(k => {
+    const range = document.getElementById(`range-${k}`);
+    const valueLabel = document.getElementById(`val-${k}`);
+    if (range) { range.value = merged[k]; }
+    if (valueLabel) { valueLabel.innerText = merged[k]; }
+  });
+  const active = modifiersAreActive();
+  updateModifierMode(active);
+}
+
+function saveModifiers() {
+  const state = {};
+  MODIFIER_KEYS.forEach(k => {
+    const range = document.getElementById(`range-${k}`);
+    state[k] = range ? Number(range.value) : DEFAULT_MODIFIERS[k];
+  });
+  try { localStorage.setItem(MOD_STORAGE_KEY, JSON.stringify(state)); } catch(e) { console.warn('Failed saving modifiers', e); }
+}
+
+function getModifierFlags() {
+  // Format as: " --style 300 --chaos 65 --stop 85 --weird 75 --stylize 950"
+  const parts = [];
+  MODIFIER_KEYS.forEach(k => {
+    const range = document.getElementById(`range-${k}`);
+    if (!range) return;
+    const v = Number(range.value);
+    const def = DEFAULT_MODIFIERS[k];
+    // Append only if not default to keep prompts clean
+    if (v !== def) {
+      const flagName = (k === 'stylize') ? '--stylize' : `--${k}`;
+      parts.push(`${flagName} ${v}`);
+    }
+  });
+  return parts.length > 0 ? ' ' + parts.join(' ') : '';
+}
+
+function appendModifierFlagsToText(baseText) {
+  if (!modifiersAreActive()) return baseText;
+  const flags = getModifierFlags();
+  return baseText + flags;
+}
+
+function hookModifierUI() {
+  MODIFIER_KEYS.forEach(k => {
+    const range = document.getElementById(`range-${k}`);
+    const valueLabel = document.getElementById(`val-${k}`);
+    if (!range || !valueLabel) return;
+    range.addEventListener('input', function() {
+      valueLabel.innerText = this.value;
+      saveModifiers();
+    });
+  });
+
+  const btnReset = document.getElementById('btn-reset-modifiers');
+  if (btnReset) {
+    btnReset.addEventListener('click', function() {
+      MODIFIER_KEYS.forEach(k => {
+        const range = document.getElementById(`range-${k}`);
+        const label = document.getElementById(`val-${k}`);
+        if (range) range.value = DEFAULT_MODIFIERS[k];
+        if (label) label.innerText = DEFAULT_MODIFIERS[k];
+      });
+      saveModifiers();
+      triggerToast("Modifiers reset.");
+    });
+  }
+
+  const toggleBtn = document.getElementById('btn-toggle-modifiers');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', function() {
+      const current = modifiersAreActive();
+      updateModifierMode(!current);
+      try { localStorage.setItem('ge-modifiers-active', JSON.stringify(!current)); } catch(e){}
+      triggerToast(!current ? "Modifiers enabled." : "Modifiers disabled.");
+    });
+  }
+}
+
+function updateModifierMode(active) {
+  const modeEl = document.getElementById('modifier-mode');
+  if (!modeEl) return;
+  modeEl.innerText = active ? 'ACTIVE' : 'INACTIVE';
+  modeEl.style.color = active ? 'var(--accent-green)' : 'var(--accent-red)';
+  try { localStorage.setItem('ge-modifiers-active', JSON.stringify(!!active)); } catch(e){}
+}
+
+function modifiersAreActive() {
+  try { return JSON.parse(localStorage.getItem('ge-modifiers-active') || 'true'); } catch(e) { return true; }
+}
+
+/* ---------------------------
+   End Modifiers JS
+   --------------------------- */
+
+function evaluateInputState(modeKey) {
+  const textInput = document.getElementById(`input-${modeKey}-concept`) || document.getElementById(`input-${modeKey}-settings`);
+  const currentTextLength = textInput ? textInput.value.trim().length : 0;
+  const actionBtn = document.getElementById(`btn-invoke-${modeKey}`) || document.getElementById(`btn-save-voice`);
+
+  if (actionBtn) {
+    if (modeKey === 'tattoo') {
+      const selectedPresets = document.querySelectorAll('#panel-tattoo .matrix-grid:nth-of-type(1) .chip.selected').length;
+      const selectedStyles = document.querySelectorAll('#panel-tattoo .matrix-grid:nth-of-type(2) .chip.selected').length;
+      const selectedPlacements = document.querySelectorAll('#panel-tattoo .placement-grid .chip.selected').length;
+      actionBtn.disabled = (currentTextLength === 0 && selectedPresets === 0 && selectedStyles === 0 && selectedPlacements === 0);
+    } else if (modeKey === 'flash') {
+      const selectedFlashStyles = document.querySelectorAll('#panel-flash .chip.selected').length;
+      actionBtn.disabled = (currentTextLength === 0 && selectedFlashStyles === 0);
+    } else if (modeKey === 'mood') {
+      const selectedMoodStyles = document.querySelectorAll('#panel-mood .chip.selected').length;
+      actionBtn.disabled = (currentTextLength === 0 && selectedMoodStyles === 0);
+    } else if (modeKey === 'promptgen') {
+      actionBtn.disabled = (currentTextLength === 0 && promptGenImagesList.length === 0);
+    } else {
+      actionBtn.disabled = currentTextLength === 0;
+    }
+  }
+  if (modeKey === 'tattoo' || modeKey === 'flash' || modeKey === 'mood' || modeKey === 'promptgen') {
+    updateDynamicSummaryBanners();
+  }
+}
+
+function executePromptGeneration(modeKey) {
+  const textInput = document.getElementById(`input-${modeKey}-concept`) || document.getElementById(`input-${modeKey}-settings`);
+  const conceptInputValue = textInput ? textInput.value.trim() : "";
+  const outputBox = document.getElementById('output-box-' + modeKey);
+  if (outputBox) outputBox.className = "output-wrapper active-output";
+  const currentTimestamp = new Date().toLocaleString();
+  const structuralVoice = globalVoiceDirective ? ` Voice parameters applied: ${globalVoiceDirective}.` : "";
+
+  if (modeKey === 'tattoo') {
+    const selectedPresetChips = Array.from(document.querySelectorAll('#panel-tattoo .matrix-grid:nth-of-type(1) .chip.selected'));
+    const selectedStyleChips = Array.from(document.querySelectorAll('#panel-tattoo .matrix-grid:nth-of-type(2) .chip.selected'));
+    const selectedPlacementChips = Array.from(document.querySelectorAll('#panel-tattoo .placement-grid .chip.selected'));
+
+    const presetNames = selectedPresetChips.map(c => c.querySelector('.chip-title').innerText.replace(/[^\w\s/]/g, '').trim());
+    const styleNames = selectedStyleChips.map(c => c.querySelector('.chip-title').innerText.replace(/[^\w\s/]/g, '').trim());
+    const placementNames = selectedPlacementChips.map(c => c.querySelector('.chip-title').innerText.replace(/[^\w\s/]/g, '').trim());
+
+    const containsDarkPreset = presetNames.some(p => p.toLowerCase().includes("dark"));
+    const includesPureStencil = styleNames.some(s => s.toLowerCase().includes("pure stencil outline formatting"));
+
+    const standardSelections = [...presetNames, ...styleNames, ...placementNames].filter(s => !s.toLowerCase().includes("pure stencil outline formatting"));
+
+    const renderTargetsArr = Array.from(document.querySelectorAll('#renderTargetDropdownContainer .dropdown-content input[type="checkbox"]:checked')).map(cb => cb.value);
+    const artMediumsArr = Array.from(document.querySelectorAll('#artMediumDropdownContainer .dropdown-content input[type="checkbox"]:checked')).map(cb => cb.value);
+    const artMediumStr = artMediumsArr.length > 0 ? artMediumsArr.join(' + ') : "Standard Technical Mix";
+
+    const renderPromptFragment = renderTargetsArr.length > 0 ? `for optimized multi-render output across [${renderTargetsArr.join(' + ')}], ` : '';
+    const targetCanvasStr = placementNames.join(', ') || 'body structure';
+    const structuralMixStyles = [...presetNames, ...styleNames].filter(s => !s.toLowerCase().includes("pure stencil outline formatting")).join(', ') || 'Custom Mix';
+
+    const conditionalStencilFragment = includesPureStencil ? "pure stencil outline formatting, " : "";
+    const conditionalDarkFragment = containsDarkPreset ? "Dark Style shadow framework overrides, deep obsidian rendering nodes, dark ambient shadow tones, " : "";
+
+    let var1 = `High-end minimalist custom flash vector asset contour design tailored for placement on ${targetCanvasStr}. ${renderPromptFragment}Utilizing creative medium profile [${artMediumStr}]. Style Guidelines: ${structuralMixStyles}.${structuralVoice} Focus motif definition parameters: ${conceptInputValue || 'Abstract Formations'}. Render clean high-resolution digital lines, ${conditionalDarkFragment}${conditionalStencilFragment}high contrast balanced composition matrices, pristine detail focal points --v 6.1 --style raw;`;
+    let var2 = `Cinematic dramatic aesthetic tattoo fine-line illustration scheme mapped symmetrically for ${targetCanvasStr}. Optimized for engine configurations [${renderTargetsArr.join(' + ') || 'Default Shader Grid'}], incorporating aesthetic paradigms of ${structuralMixStyles}.${structuralVoice} Artistic medium processing: ${artMediumStr}. Focus variable attributes: ${conceptInputValue || 'Abstract Formations'}. ${conditionalDarkFragment}${conditionalStencilFragment}Ultra crisp continuous path linework, absolute ink density tracking --v 6.1;`;
+    let var3 = `Avant-garde custom graphic concept placement layout orchestration. Designated area: ${targetCanvasStr}. Complex illustrative structures fusing ${structuralMixStyles} traits under unified ${artMediumStr} canvas parameters.${structuralVoice} Project directive: ${conceptInputValue || 'Abstract Formations'}. ${conditionalDarkFragment}${conditionalStencilFragment}Flawless contrast metrics, complete structural cohesion and edge alignment --v 6.1 --style raw;`;
+
+    // Append modifier flags if active
+    var1 = appendModifierFlagsToText(var1);
+    var2 = appendModifierFlagsToText(var2);
+    var3 = appendModifierFlagsToText(var3);
+
+    activeGeneratedVariations = [var1, var2, var3];
+
+    const out1 = document.getElementById('text-output-tattoo-1');
+    const out2 = document.getElementById('text-output-tattoo-2');
+    const out3 = document.getElementById('text-output-tattoo-3');
+    if (out1) out1.innerText = var1;
+    if (out2) out2.innerText = var2;
+    if (out3) out3.innerText = var3;
+
+    loggedPromptsHistory.unshift({ timestamp: currentTimestamp, engine: "Pyraxis Engine Studio (3-Var Set)", body: var1 });
+    saveHistory();
+    updateConsultationSpecs(var1, standardSelections.join(' + ') || 'Custom Vector Mix', targetCanvasStr);
+    triggerToast("Compilation finalized. 3 Variations Forged.");
+
+  } else if (modeKey === 'flash') {
+    const targetFlashCardsBox = document.getElementById('container-flash-cards');
+    if (targetFlashCardsBox) targetFlashCardsBox.innerHTML = '';
+    const selectedFlashStyles = Array.from(document.querySelectorAll('#panel-flash .chip.selected')).map(c => c.querySelector('.chip-title').innerText.replace(/[^\w\s/]/g, '').trim());
+    const styleString = selectedFlashStyles.join(', ') || 'Traditional American';
+
+    const flashCategories = [
+      { id: "#01 HERO PIECE", type: "Full Color Focus Element", note: "Central structural master layer asset configuration" },
+      { id: "#02 FILLER ATOMS", type: "Muted Secondary Linework", note: "Supporting motif cluster design mapping" },
+      { id: "#03 PANEL VARIANT", type: "Traditional Bold Silhouette", note: "High exposure stencil format optimization" },
+      { id: "#04 LINECUT STUDY", type: "Pure Vector Outline Shard", note: "Zero gradient execution single-needle reference" },
+      { id: "#05 ACCENT CHIP", type: "Geometric Spacer Asset", note: "Complementary micro filler arrangement node" },
+      { id: "#06 BACKGROUND GRID", type: "Shading Depth Paradigm", note: "Atmospheric cloud layout vector spacing" },
+      { id: "#07 TEXTURE VARIANT", type: "Stippled Ink Gradient", note: "Whip shading density mapping reference" },
+      { id: "#08 MINIMAL NODE", type: "Iconographic Stamp Out", note: "Clean symbolic asset implementation vector" }
+    ];
+
+    flashCategories.forEach((item, index) => {
+      const cardElement = document.createElement('div');
+      cardElement.className = 'flash-card';
+      const blockId = `text-output-flash-${index}`;
+      const basePrompt = `Clean operational ${styleString} flash sheet configuration layout showcasing ${conceptInputValue || 'Symbolic Elements'}, ${item.note}, isolated matrix environment,${structuralVoice} high fidelity line art paths --ar 3:4 --v 6.1`;
+      const finalPrompt = appendModifierFlagsToText(basePrompt);
+      cardElement.innerHTML = `
+        <div class="flash-card-header">
+          <span>${item.id}</span>
+          <span>${item.type}</span>
+        </div>
+        <div class="flash-card-body" id="${blockId}">${finalPrompt}</div>
+        <div class="flash-card-footer">
+          <button type="button" class="flash-copy-btn" onclick="copyPromptToClipboard('${blockId}')">Copy Element</button>
+        </div>`;
+      if (targetFlashCardsBox) targetFlashCardsBox.appendChild(cardElement);
+    });
+
+    loggedPromptsHistory.unshift({ timestamp: currentTimestamp, engine: "Cluster Flash Engine", body: `8-piece flash matrix compiled for theme: "${conceptInputValue || 'System Presets'}"` });
+    saveHistory();
+    triggerToast("Flash matrix generated.");
+
+  } else if (modeKey === 'batch') {
+    const targetBatchCardsBox = document.getElementById('container-batch-cards');
+    if (targetBatchCardsBox) targetBatchCardsBox.innerHTML = '';
+
+    const batchVariants = [
+      { label: "FINE LINE MINIMAL", style: "ultra fine single-needle linework, negative space composition, whisper-thin strokes, minimalist negative space", mood: "delicate, precise, breathable", finish: "--ar 3:4 --v 6.1 --style raw" },
+      { label: "BLACKWORK BOLD", style: "heavy blackwork saturation, bold tribal geometry, solid ink blocks, aggressive contrast ratios", mood: "striking, dominant, graphic", finish: "--ar 1:1 --v 6.1" },
+      { label: "WATERCOLOR PAINTERLY", style: "loose watercolor bleed edges, pigment splash diffusion, painterly soft boundaries, chromatic wash overlay", mood: "fluid, expressive, organic", finish: "--ar 3:4 --v 6.1 --style raw" },
+      { label: "REALISM DETAIL", style: "photorealistic rendering, volumetric shadow depth, hyper-detailed texture mapping, cinematic lighting", mood: "dimensional, lifelike, complex", finish: "--ar 2:3 --v 6.1" },
+      { label: "GEOMETRIC SACRED", style: "sacred geometry grid overlay, mandala proportion schema, symmetrical dot-work matrix, mathematical precision", mood: "meditative, structured, sacred", finish: "--ar 1:1 --v 6.1 --style raw" },
+      { label: "TRADITIONAL FLASH", style: "classic American traditional bold outline, flat saturated primaries, vintage flash sheet aesthetic", mood: "timeless, bold, iconic", finish: "--ar 3:4 --v 6.1" },
+      { label: "NEO-TRADITIONAL", style: "neo-traditional illustrative linework, jewel-tone color palette, Art Nouveau botanical framing elements", mood: "ornate, lush, narrative", finish: "--ar 2:3 --v 6.1" },
+      { label: "DARKWORK / HORROR", style: "high contrast darkwork etching, macabre atmospheric shading, gothic texture detail, deep shadow rendering", mood: "haunting, intense, atmospheric", finish: "--ar 3:4 --v 6.1 --style raw" }
+    ];
+
+    batchVariants.forEach((variant, index) => {
+      const cardElement = document.createElement('div');
+      cardElement.className = 'flash-card';
+      cardElement.style.borderColor = '#475569';
+      const blockId = `text-output-batch-${index + 1}`;
+      const baseText = `${variant.label} tattoo design — subject: ${conceptInputValue || 'Abstract Symbolic Element'}. Style execution: ${variant.style}. Mood register: ${variant.mood}.${structuralVoice} Isolated on clean background, tattoo stencil-ready composition, high fidelity line art paths ${variant.finish}`;
+      const promptText = appendModifierFlagsToText(baseText);
+      cardElement.innerHTML = `
+        <div class="flash-card-header" style="background:#262f44;">
+          <span>BATCH NODE #0${index + 1}</span><span style="color:#a4a9c3;">${variant.label}</span>
+        </div>
+        <div class="flash-card-body" style="color:#cbd5e1;" id="${blockId}">${promptText}</div>
+        <div class="flash-card-footer">
+          <button type="button" class="flash-copy-btn" onclick="copyPromptToClipboard('${blockId}')">Copy Prompt</button>
+        </div>`;
+      if (targetBatchCardsBox) targetBatchCardsBox.appendChild(cardElement);
+    });
+
+    loggedPromptsHistory.unshift({ timestamp: currentTimestamp, engine: "Batch Prompt Matrix Engine", body: `Generated 8 distinct style-variant nodes for: "${conceptInputValue || 'Baseline Structure'}"` });
+    saveHistory();
+    triggerToast("8 Batch style variants compiled.");
+
+  } else if (modeKey === 'mood') {
+    const targetMoodCardsBox = document.getElementById('container-mood-cards');
+    if (targetMoodCardsBox) targetMoodCardsBox.innerHTML = '';
+    const selectedMoodStyles = Array.from(document.querySelectorAll('#panel-mood .chip.selected')).map(c => c.querySelector('.chip-title').innerText.replace(/[^\w\s/]/g, '').trim());
+    const styleMoodStr = selectedMoodStyles.join(', ') || 'Organic Continuous Elements';
+
+    const moodRenderTargets = Array.from(document.querySelectorAll('#moodRenderTargetDropdownContainer .dropdown-content input[type="checkbox"]:checked')).map(cb => cb.value);
+    const moodArtMediums = Array.from(document.querySelectorAll('#moodArtMediumDropdownContainer .dropdown-content input[type="checkbox"]:checked')).map(cb => cb.value);
+    const moodMediumStr = moodArtMediums.length > 0 ? moodArtMediums.join(' + ') : "Mixed Production Mediums";
+    const moodTargetStr = moodRenderTargets.length > 0 ? ` [Engine Shader Mix: ${moodRenderTargets.join(' + ')}]` : "";
+
+    const moodAngles = [
+      { title: "Perspective Angle 1: Orthographic Anatomical Silhouette Grid", modifier: "flat architectural orthographic drafting schema profile, technical structural lines" },
+      { title: "Perspective Angle 2: High Contrast Macro Highlight Vignette", modifier: "extreme close-up dramatic micro lens illumination capture, highlighting core textural density points" },
+      { title: "Perspective Angle 3: Conceptual Neo-Surrealist Atmospheric Overlay", modifier: "dreamlike abstract surreal composition framework, blending fluid environmental element layers" },
+      { title: "Perspective Angle 4: Geometric Symmetry Alignment Blueprint", modifier: "sacred math proportion schema calculations overlay, continuous structural boundary framework lines" },
+      { title: "Perspective Angle 5: Tactile Charcoal Vignette Canvas Shade", modifier: "smudged charcoal stippled gradient texture reference map, heavy organic value shading dynamics" },
+      { title: "Perspective Angle 6: Hyper-Vibrant Spectral Saturation Study", modifier: "luminescent dynamic pigment balance mapping layout, chromatic high-contrast color nodes" }
+    ];
+
+    moodAngles.forEach((angle, index) => {
+      const cardElement = document.createElement('div');
+      cardElement.className = 'mood-variant-card';
+      const blockId = `text-output-mood-${index}`;
+      const basePrompt = `Tattoo design mood assembly layout tracking concept profile "${conceptInputValue || 'Shifting Horizons'}", styled through design paradigm traits of ${styleMoodStr}. Render properties: ${moodMediumStr}${moodTargetStr}. Structural variation angle parameters: ${angle.modifier}.${structuralVoice} Clean asset framing boundaries --v 6.1 --style raw`;
+      const finalPrompt = appendModifierFlagsToText(basePrompt);
+      cardElement.innerHTML = `
+        <div class="mood-variant-title">${angle.title}</div>
+        <div class="mood-variant-content" id="${blockId}">${finalPrompt}</div>
+        <div style="display:flex; justify-content:flex-end;">
+          <button type="button" class="flash-copy-btn" onclick="copyPromptToClipboard('${blockId}')">Copy Angle Prompt</button>
+        </div>`;
+      if (targetMoodCardsBox) targetMoodCardsBox.appendChild(cardElement);
+    });
+
+    loggedPromptsHistory.unshift({ timestamp: currentTimestamp, engine: "Mood Board Framework", body: `Assembled 6 alternative mood perspectives for concept vector: "${conceptInputValue || 'Narrative Stream'}"` });
+    saveHistory();
+    triggerToast("Mood board suite compiled successfully.");
+
+  } else if (modeKey === 'promptgen') {
+    const targetPGCardsBox = document.getElementById('container-promptgen-cards');
+    if (targetPGCardsBox) targetPGCardsBox.innerHTML = '';
+
+    const pgRenderTargets = Array.from(document.querySelectorAll('#pgRenderTargetDropdownContainer .dropdown-content input[type="checkbox"]:checked')).map(cb => cb.value);
+    const pgArtMediums = Array.from(document.querySelectorAll('#pgMediumDropdownContainer .dropdown-content input[type="checkbox"]:checked')).map(cb => cb.value);
+
+    const pgMediumStr = pgArtMediums.length > 0 ? pgArtMediums.join(' + ') : "Mixed Digital Composite";
+    const pgTargetStr = pgRenderTargets.length > 0 ? pgRenderTargets.join(' + ') : "High Fidelity Output Pipeline";
+
+    const rawText = conceptInputValue || '';
+    const hasText = rawText.length > 0;
+    const textInfluenceBlock = hasText
+      ? `PRIMARY CONCEPT DIRECTIVE (95% influence weight): "${rawText}".`
+      : `PRIMARY CONCEPT DIRECTIVE (95% influence weight): "Abstract Unified Synthesis".`;
+
+    let imgInfluenceBlock = "";
+    if (promptGenImagesList.length > 0) {
+      const imgLabels = promptGenImagesList.map((img, i) => `[Reference Image ${i + 1}: ${img.name}]`).join(' + ');
+      imgInfluenceBlock = ` VISUAL REFERENCE TENSOR MATRIX (85% image influence): ${imgLabels}. Derive subject tones, textures, color fields, and structural forms directly from uploaded references.`;
+    }
+
+    const pgVariants = [
+      { label: "PIPELINE #1 — Cinematic Drama", lens: "hauntingly epic atmospheric scene construction", lighting: "high contrast chiaroscuro with sweeping volumetric light shafts", composition: "extreme wide panoramic format, deep foreground-to-background spatial layering", finish: "--ar 16:9 --v 6.1 --style raw" },
+      { label: "PIPELINE #2 — Biomechanical Construct", lens: "cybernetic anatomy fusion, dark surrealist mechanical integration", lighting: "internal bio-luminescent neon core tubing, cold desaturated ambient fill", composition: "macro focal depth isolation, hyper-detailed mechanical cross-section framing", finish: "--ar 2:3 --v 6.1" },
+      { label: "PIPELINE #3 — Mythic Ethereal", lens: "vibrant fantastical concept art, sacred cosmic symbolism", lighting: "dramatic prismatic rim backlight with chromatic scatter lens flare", composition: "dynamic low-angle heroic perspective, upward diagonal movement flow", finish: "--ar 3:4 --v 6.1 --style raw" },
+      { label: "PIPELINE #4 — Baroque Masterwork", lens: "historical painterly oil technique, moody classical chiaroscuro essence", lighting: "diffuse warm golden twilight with deep shadow recession", composition: "centered deep-field symmetry, balanced classical compositional weight", finish: "--ar 4:5 --v 6.1" },
+      { label: "PIPELINE #5 — Geometric Anomaly", lens: "abstract mathematical distortion, sacred geometry lattice deconstruction", lighting: "subsurface shimmering iridescent lattice dispersion, cool refracted gradients", composition: "isometric multi-layered schematic structure, recursive geometric nesting", finish: "--ar 1:1 --v 6.1 --style raw" }
+    ];
+
+    pgVariants.forEach((variant, index) => {
+      const cardElement = document.createElement('div');
+      cardElement.className = 'flash-card';
+      cardElement.style.borderColor = 'var(--accent-blue)';
+      const blockId = `text-output-promptgen-${index + 1}`;
+
+      const finalPromptText =
+        `${textInfluenceBlock}${imgInfluenceBlock} ` +
+        `Art Medium Configuration: [${pgMediumStr}]. ` +
+        `Render Engine Target: [${pgTargetStr}]. ` +
+        `Visual Lens: ${variant.lens}. ` +
+        `Lighting Schema: ${variant.lighting}. ` +
+        `Composition Strategy: ${variant.composition}. ` +
+        `${variant.finish}`;
+
+      const finalWithModifiers = appendModifierFlagsToText(finalPromptText);
+
+      cardElement.innerHTML = `
+        <div class="flash-card-header" style="background:#1a2336; border-bottom:1px solid var(--accent-blue);">
+          <span style="color:var(--accent-blue);">${variant.label}</span>
+          <span style="color:var(--text-muted); font-size:0.58rem;">ISOLATED VECTOR</span>
+        </div>
+        <div class="flash-card-body" style="color:var(--text-bright); font-family:monospace; font-size:0.72rem; line-height:1.5; word-break:break-word; padding:14px;" id="${blockId}">${finalWithModifiers}</div>
+        <div class="flash-card-footer">
+          <button type="button" class="flash-copy-btn" style="border-color:var(--accent-blue); color:var(--text-bright);" onclick="copyPromptToClipboard('${blockId}')">⎘ Copy Prompt</button>
+        </div>`;
+      if (targetPGCardsBox) targetPGCardsBox.appendChild(cardElement);
+    });
+
+    loggedPromptsHistory.unshift({
+      timestamp: currentTimestamp,
+      engine: "PromptGen Core Matrix Engine",
+      body: `Forged 5 isolated pipeline configurations. Text influence: 95%. Image references: ${promptGenImagesList.length > 0 ? promptGenImagesList.map(i => i.name).join(', ') : 'none'}. Concept: "${conceptInputValue || 'Abstract Vector'}"`
+    });
+    saveHistory();
+    triggerToast("5 PromptGen pipelines compiled.");
+
+  } else if (modeKey === 'voice') {
+    globalVoiceDirective = conceptInputValue;
+    localStorage.setItem('ge-voice', conceptInputValue);
+    loggedPromptsHistory.unshift({ timestamp: currentTimestamp, engine: "Voice Matrix Engine", body: `Permanent voice directives systematically locked: "${conceptInputValue}"` });
+    saveHistory();
+    triggerToast("Artistic voice parameters locked.");
+  }
+}
+
+function saveHistory() {
+  try {
+    localStorage.setItem('ge-history', JSON.stringify(loggedPromptsHistory));
+  } catch (e) {
+    console.warn('History save failed:', e);
+  }
+}
+
+function renderSystemHistoryLog() {
+  const container = document.getElementById('container-history-items');
+  if (!container) return;
+  container.innerHTML = '';
+  if (loggedPromptsHistory.length === 0) {
+    container.innerHTML = '<div style="text-align:center; padding:20px; font-size:0.75rem; color:var(--text-muted);">Session log registry empty.</div>';
+    return;
+  }
+  loggedPromptsHistory.forEach((item) => {
+    const historyDiv = document.createElement('div');
+    historyDiv.className = 'history-item';
+    historyDiv.innerHTML = `
+      <div class="history-meta">
+        <span>⚡ ${item.engine}</span>
+        <span>${item.timestamp}</span>
+      </div>
+      <div class="history-body">${item.body}</div>`;
+    container.appendChild(historyDiv);
+  });
+}
+
+function clearSystemHistoryLog() {
+  loggedPromptsHistory = [];
+  localStorage.removeItem('ge-history');
+  renderSystemHistoryLog();
+  triggerToast("Session archives wiped.");
+}
+
+function copyPromptToClipboard(elementId) {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+  const targetText = el.innerText || el.textContent;
+  if (!targetText) return;
+  navigator.clipboard.writeText(targetText).then(() => {
+    triggerToast("Copied to clipboard.");
+  }).catch(() => {
+    triggerToast("Clipboard execution failed.");
+  });
+}
+
+function copyAllBatchPrompts() {
+  const prompts = Array.from(document.querySelectorAll('#container-batch-cards .flash-card-body')).map(el => el.innerText);
+  if (prompts.length === 0) return;
+  navigator.clipboard.writeText(prompts.join('\n\n')).then(() => {
+    triggerToast("All 8 batch nodes copied.");
+  }).catch(() => {
+    triggerToast("Clipboard execution failed.");
+  });
+}
+
+function triggerToast(message) {
+  const toast = document.getElementById('toastMessageContainer');
+  if (!toast) return;
+  toast.innerText = message;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2200);
+}
+
+function updateConsultationSpecs(promptText, mixedMix, canvasArea) {
+  const t = document.getElementById('cc-target-prompt-text');
+  const m = document.getElementById('cc-meta-mix');
+  const c = document.getElementById('cc-meta-canvas');
+  if (t) t.innerText = promptText;
+  if (m) m.innerText = mixedMix;
+  if (c) c.innerText = canvasArea;
+}
+
+function navigateToConsultationCard(varIndex) {
+  const selectedText = activeGeneratedVariations[varIndex - 1];
+  if (!selectedText) {
+    triggerToast("Generate structural prompts first.");
+    return;
+  }
+  const main = document.getElementById('mainAppStructure');
+  const zoom = document.querySelector('.zoom-hud');
+  if (main) main.style.display = 'none';
+  if (zoom) zoom.style.display = 'none';
+  document.getElementById('consultationCardStructure').classList.add('active-view');
+  window.scrollTo(0, 0);
+}
+
+function exitConsultationCardView() {
+  document.getElementById('consultationCardStructure').classList.remove('active-view');
+  const main = document.getElementById('mainAppStructure');
+  const zoom = document.querySelector('.zoom-hud');
+  if (main) main.style.display = 'flex';
+  if (zoom) zoom.style.display = 'flex';
+}
+
+// Keyboard accessibility for chips
+document.addEventListener('keydown', function(e) {
+  if (e.target && e.target.classList && e.target.classList.contains('chip') && (e.key === 'Enter' || e.key === ' ')) {
+    e.preventDefault();
+    e.target.click();
+  }
+});
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', function() {
+  executeScaleTransformation();
+  evaluateInputState('tattoo');
+  evaluateInputState('flash');
+  evaluateInputState('batch');
+  evaluateInputState('mood');
+  evaluateInputState('voice');
+  evaluateInputState('promptgen');
+  if (globalVoiceDirective) {
+    const voiceInput = document.getElementById('input-voice-settings');
+    if (voiceInput) voiceInput.value = globalVoiceDirective;
+  }
+  // Modifiers
+  loadModifiers();
+  hookModifierUI();
+});
+</script>
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;var a=target.closest?target.closest("a[href]"):null;if(!a||!a.href||!/^https?:\/\//.test(a.href))return;if(a.href.replace(/#.*$/,"")===loc)return;var productId=extractProductId(target)||extractProductId(a);if(!productId)return;e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*")},true)})();</script>
+<script>
+// 4-CAMERA SSS
+(function(){
+  const panel=document.getElementById('panel-camera');
+  if(!panel) return;
+  const LUNARA = ["moonlight","starlight","dusk","twilight","midnight","lunar","ethereal","silver","glow","nocturne","nebula","cosmic"];
+const AETHON = ["ember","flame","blaze","inferno","plasma","spark","ignite","molten","radiant","solar flare","phoenix","dragonfire","volcanic","scorch","incandescent","forge","wildfire","brimstone","hellfire","supernova","combustion","pyroclastic","thermonuclear"];
+const SOLARIS = ["sunlight","dawn","sunrise","golden hour","daylight","solar","bright","warm","amber","honey","radiant sun","midday","afternoon","sunbeam","clear sky","vibrant","vivid","summer","solstice","heliacal","aureate","citrine","marigold","tangerine","saffron","topaz","daybreak","morning light","noon","sundrenched","luminous","incandescent day"];
+
+const keywordPicker = document.getElementById('keywordPicker');
+const subject = document.getElementById('subject');
+const output = document.getElementById('output');
+const generateBtn = document.getElementById('generate');
+const copyBtn = document.getElementById('copy');
+const guardianToggle = document.getElementById('guardianToggle');
+const signature = document.getElementById('signature');
+const skinFix = document.getElementById('skinFix');
+const lens = document.getElementById('lens');
+
+const dots = {
+  lunara: document.getElementById('dot-lunara'),
+  aethon: document.getElementById('dot-aethon'),
+  solaris: document.getElementById('dot-solaris')
+};
+
+const lensMap = {
+  portrait: "85mm f/1.4 prime lens, shallow to extremely shallow depth of field, creamy bokeh background",
+  macro: "100mm f/2.8 macro lens, ultra-shallow depth of field",
+  micro: "Laowa 25mm f/2.8 2.5-5x ultra-macro lens, infinitesimal depth of field, focus stacking",
+  landscape: "24mm f/11 wide-angle lens, deep to infinite depth of field"
+};
+
+const signatureText = ", in the lower left corner engrave 'michael benneig' once in a clean minimalist blue-turquoise stylized font";
+const skinFixText = "subsurface scattering, natural skin translucency, realistic skin pores and fine texture, subtle peach fuzz, split tone warm highlights cool shadows, desaturated natural skin";
+
+function insertAtCursor(word) {
+  const start = subject.selectionStart ?? subject.value.length;
+  const end = subject.selectionEnd ?? subject.value.length;
+  const before = subject.value.substring(0, start);
+  const after = subject.value.substring(end);
+  const needsSpaceBefore = before.length > 0 && !before.endsWith(' ') && !before.endsWith('\n');
+  const insert = (needsSpaceBefore ? ' ' : '') + word + ' ';
+  subject.value = before + insert + after;
+  const pos = before.length + insert.length;
+  subject.focus();
+  subject.setSelectionRange(pos, pos);
+  detectGuardians();
+}
+
+keywordPicker.addEventListener('change', e => {
+  const val = e.target.value;
+  if (!val) return;
+  insertAtCursor(val);
+  keywordPicker.value = "";
+});
+
+function detectGuardians() {
+  Object.values(dots).forEach(d => d.classList.remove('active'));
+  if (!guardianToggle.checked) return;
+  const text = subject.value.toLowerCase();
+  const has = arr => arr.some(w => text.includes(w.toLowerCase()));
+  if (has(LUNARA)) dots.lunara.classList.add('active');
+  if (has(AETHON)) dots.aethon.classList.add('active');
+  if (has(SOLARIS)) dots.solaris.classList.add('active');
+}
+
+subject.addEventListener('input', detectGuardians);
+guardianToggle.addEventListener('change', detectGuardians);
+
+generateBtn.addEventListener('click', () => {
+  const subj = subject.value.trim() || subject.placeholder.trim();
+  const lensPhrase = lensMap[lens.value];
+  let prompt = `${subj}, photorealistic, cinematic, ${lensPhrase}`;
+  if (skinFix && skinFix.checked) prompt += `, ${skinFixText}`;
+  prompt += `, ultra-detailed, natural lighting, 8k RAW`;
+  if (signature.checked) prompt += signatureText;
+  output.value = prompt;
+  output.focus();
+  output.select();
+});
+
+copyBtn.addEventListener('click', async () => {
+  if (!output.value) return;
+  try {
+    await navigator.clipboard.writeText(output.value);
+    const prev = copyBtn.textContent;
+    copyBtn.textContent = 'COPIED!';
+    copyBtn.style.color = '#1dd3b0';
+    setTimeout(() => { copyBtn.textContent = prev; copyBtn.style.color = ''; }, 1400);
+  } catch {
+    output.select();
+    document.execCommand('copy');
+  }
+});
+
+// init
+detectGuardians();
+})();
+</script>
+
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;var a=target.closest?target.closest("a[href]"):null;if(!a||!a.href||!/^https?:\/\//.test(a.href))return;if(a.href.replace(/#.*$/,"")===loc)return;var productId=extractProductId(target)||extractProductId(a);if(!productId)return;e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*")},true)})();</script></body>
+</html>
